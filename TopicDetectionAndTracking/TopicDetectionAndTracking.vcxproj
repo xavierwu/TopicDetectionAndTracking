@@ -79,6 +79,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DataPreprocessing.cpp" />
+    <ClCompile Include="Evaluation.cpp" />
     <ClCompile Include="FirstStoryDetection.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Story.cpp" />
@@ -89,6 +90,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataPreprocessing.h" />
+    <ClInclude Include="Evaluation.h" />
     <ClInclude Include="FirstStoryDetection.h" />
     <ClInclude Include="Story.h" />
     <ClInclude Include="StoryLinkDetection.h" />
@@ -96,6 +98,10 @@
     <ClInclude Include="TopicDetection.h" />
     <ClInclude Include="TopicTracking.h" />
     <ClInclude Include="Utilities.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="20030402_0530_0700_CNA_MAN.mttkn" />
+    <None Include="20030402_0730_0930_XIN_MAN.mttkn_bnd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

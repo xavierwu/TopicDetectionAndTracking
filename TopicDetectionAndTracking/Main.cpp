@@ -1,7 +1,7 @@
 #include "DataPreprocessing.h"
 #include "TopicDetection.h"
 #include "FirstStoryDetection.h"
-#include "TopicTracking.h"
+#include "Evaluation.h"
 
 vector<Story> corpus;
 vector<string> glossary;
@@ -14,6 +14,7 @@ int main(int argc, char **argv)
 	DataPreprocessing(corpus, glossary, tkn_file, bnd_file);
 	TopicDetection(corpus);
 	FirstStoryDetection(firstStories, corpus);
+	Evaluation(firstStories, corpus);
 
 	return 0;
 }

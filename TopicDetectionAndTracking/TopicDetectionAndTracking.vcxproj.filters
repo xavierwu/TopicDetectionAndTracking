@@ -39,6 +39,9 @@
     <ClCompile Include="DataPreprocessing.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Evaluation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StorySegmentation.h">
@@ -65,5 +68,16 @@
     <ClInclude Include="DataPreprocessing.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Evaluation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="20030402_0530_0700_CNA_MAN.mttkn">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="20030402_0730_0930_XIN_MAN.mttkn_bnd">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

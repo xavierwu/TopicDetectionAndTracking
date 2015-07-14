@@ -8,4 +8,5 @@ bool StoryLinkDetection(const Story &story1, const Story &story2, double thresho
 double getSimilarity(const Story &story1, const Story &story2)
 {
 	// TODO: get similarity
+	return 0.0;
 }
