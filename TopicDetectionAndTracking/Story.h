@@ -10,6 +10,7 @@ private:
 	vector<int> words; // the index of each word of 'words_s', refer to the glossary
 	int topicID = -1;
 	string timeStamp;
+	int storyID;
 	
 public:
 	Story();
@@ -23,6 +24,8 @@ public:
 	int getTopicID() const;
 	void setTimeStamp(const string &timeStamp);
 	string getTimeStamp() const;
+	void setStoryID(int storyID);
+	int getStoryID(int storyID) const;
 };
 
 #endif
