@@ -6,6 +6,9 @@ and the creation of bins is an unsupervised task. */
 
 #include "../StoryLinkDetection/StoryLinkDetection.h"
 
+/* Threshold for clustering. */
+static double threshold = 0.8;  // TODO: to be modified
+
 /* Cluster stories into topics.
 Input: corpus
 Output: corpus, with 'topicId' set. */
