@@ -10,6 +10,34 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="DataPreprocessing\DataPreprocessing.cpp" />
+    <ClCompile Include="Evaluation\Evaluation.cpp" />
+    <ClCompile Include="FirstStoryDetection\FirstStoryDetection.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Presentation\Presentation.cpp" />
+    <ClCompile Include="StoryLinkDetection\StoryLinkDetection.cpp" />
+    <ClCompile Include="StorySegmentation\StorySegmentation.cpp" />
+    <ClCompile Include="TopicDetection\TopicDetection.cpp" />
+    <ClCompile Include="TopicTracking\TopicTracking.cpp" />
+    <ClCompile Include="Utilities\Story.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DataPreprocessing\DataPreprocessing.h" />
+    <ClInclude Include="Evaluation\Evaluation.h" />
+    <ClInclude Include="FirstStoryDetection\FirstStoryDetection.h" />
+    <ClInclude Include="Presentation\Presentation.h" />
+    <ClInclude Include="StoryLinkDetection\StoryLinkDetection.h" />
+    <ClInclude Include="StorySegmentation\StorySegmentation.h" />
+    <ClInclude Include="TopicDetection\TopicDetection.h" />
+    <ClInclude Include="TopicTracking\TopicTracking.h" />
+    <ClInclude Include="Utilities\Story.h" />
+    <ClInclude Include="Utilities\Utilities.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Dataset\mttkn\20030402_0530_0700_CNA_MAN.mttkn" />
+    <None Include="Dataset\mttkn_bnd\20030402_0530_0700_CNA_MAN.mttkn_bnd" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{AE135031-9969-4F5E-82B0-974800352F3F}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
@@ -77,32 +105,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="DataPreprocessing.cpp" />
-    <ClCompile Include="Evaluation.cpp" />
-    <ClCompile Include="FirstStoryDetection.cpp" />
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Story.cpp" />
-    <ClCompile Include="StoryLinkDetection.cpp" />
-    <ClCompile Include="StorySegmentation.cpp" />
-    <ClCompile Include="TopicDetection.cpp" />
-    <ClCompile Include="TopicTracking.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="DataPreprocessing.h" />
-    <ClInclude Include="Evaluation.h" />
-    <ClInclude Include="FirstStoryDetection.h" />
-    <ClInclude Include="Story.h" />
-    <ClInclude Include="StoryLinkDetection.h" />
-    <ClInclude Include="StorySegmentation.h" />
-    <ClInclude Include="TopicDetection.h" />
-    <ClInclude Include="TopicTracking.h" />
-    <ClInclude Include="Utilities.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="20030402_0530_0700_CNA_MAN.mttkn" />
-    <None Include="20030402_0730_0930_XIN_MAN.mttkn_bnd" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

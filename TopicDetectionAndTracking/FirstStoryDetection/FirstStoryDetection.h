@@ -3,7 +3,7 @@
 #ifndef FIRST_STORY_DETECTION_H
 #define FIRST_STORY_DETECTION_H
 
-#include "Story.h"
+#include "../Utilities/Story.h"
 
 /* Detect the first story of every topic.
 Input: 'corpus'
