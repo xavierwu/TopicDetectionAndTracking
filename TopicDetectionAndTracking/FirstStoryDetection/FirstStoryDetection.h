@@ -6,8 +6,9 @@
 #include "../Utilities/Story.h"
 
 /* Detect the first story of every topic.
-Input: 'corpus'
+Input: 'corpus', and the number of topics
 Output: 'firstStories', it's ordered by topicId. */
-void FirstStoryDetection(vector<Story> &firstStories, const vector<Story> &corpus);
+void FirstStoryDetection(vector<Story> &firstStories, const vector<Story> &corpus, 
+						 const int &numOfTopics);
 
 #endif

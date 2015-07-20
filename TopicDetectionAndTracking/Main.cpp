@@ -16,8 +16,10 @@ int main (int argc, char **argv)
 	string bnd_file = "Dataset/mttkn_bnd/20030402_0530_0700_CNA_MAN.mttkn_bnd";
 
 	DataPreprocessing (corpus, glossary, tkn_file, bnd_file);
-	TopicDetection (corpus);
-	FirstStoryDetection (firstStories, corpus);
+
+	int numOfTopics = 0;
+	TopicDetection (corpus, numOfTopics);
+	FirstStoryDetection (firstStories, corpus, numOfTopics);
 
 	return 0;
 }
