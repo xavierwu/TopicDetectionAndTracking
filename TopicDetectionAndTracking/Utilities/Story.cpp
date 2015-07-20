@@ -62,3 +62,30 @@ int Story::getTopicID () const
 {
 	return this->topicID;
 }
+
+int Story::getLength () const
+{
+	return this->words.size ();
+}
+
+void Story::getTermCountMap (map<int, int> &termCountMap) const
+{
+	for (int curWordID : this->words) {
+		if (termCountMap.find (curWordID) == termCountMap.end ()) // curWordID not found
+			termCountMap[curWordID] = 1;
+		else // curWordID is found
+			termCountMap[curWordID]++;
+	}
+}
+
+/* REQUIRE: getLength(), getTermCoundVector() */
+void Story::getTermFrequencyMap (map<int, double> &termFrequencyMap) const
+{
+	map<int, int> termCountMap;
+	this->getTermCountMap (termCountMap);
+	double length = this->getLength ();
+	for (map<int, int>::const_iterator iter = termCountMap.cbegin ();
+		 iter != termCountMap.cend (); ++iter) {
+		termFrequencyMap[iter->first] = iter->second / length;
+	}
+}

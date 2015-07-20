@@ -21,21 +21,44 @@ public:
 	/* The first two parameters are necessary, so we dont use default constructor. */
 	Story (int storyID, const vector<int> words, const string &timeStamp = "", int topicID = UNCLUSTERED);
 
-	/* Set & get storyID */
-	//	void setStoryID (int storyID); // Unused. The storyID should be set only once, when the story is created. 
+	/* Get 'storyID' */
 	int getStoryID () const;
-	/* Set & get words, the whole vector. */
-	//	void setWords (vector<int> &words); // Unused. The words should be set only once, when the story is created. 
+	//// UNUSED: The storyID should be set only once, when the story is created.
+	///* Set 'storyID'. */
+	//void setStoryID (int storyID);
+
+	/* Get words, the whole vector. */
 	vector<int> getWords () const;
-	/* Set & get words[index], a specific element in the vector. */
-	//	void setWord (int index); // Unused. The words should be set only once, when the story is created. 
+	//// UNUSED: The words should be set only once, when the story is created. 
+	///* Set words, the whold vector. */
+	//void setWords (vector<int> &words); 
+
+	/* Get words[index], a specific element in the vector. */
 	int getWord (int index) const;
-	/* Set & get timeStamp */
-	void setTimeStamp (const string &timeStamp);
+	//// Unused. The words should be set only once, when the story is created. 
+	///* Set words[index], a specific element in the vector. */
+	//void setWord (int index);
+
+	/* Get 'timeStamp' */
 	string getTimeStamp () const;
-	/* Set & get topicID */
-	void setTopicID (int topicID);
+	/* Set 'timeStamp' */
+	void setTimeStamp (const string &timeStamp);
+
+	/* Get topicID */
 	int getTopicID () const;
+	/* Set topicID */
+	void setTopicID (int topicID);
+
+	/* return the length of the story, i.e., the length of 'words' */
+	int getLength () const;
+
+	/* return a map, whose key is the wordID in the glossary and the value is
+	 the times a term appears in this story. */
+	void getTermCountMap (map<int, int> &termCountMap) const;
+
+	/* termFrequenctMap would be set to include the frequency (in this story) of every word. 
+	The key is wordID, and the value is frequency. */
+	void getTermFrequencyMap (map<int, double> &termFrequencyMap) const;
 };
 
 #endif

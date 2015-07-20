@@ -7,10 +7,11 @@ file again, since all other .h files would include this file. */
 
 #include <string>
 #include <vector>
+#include <map>
 
 // please avoid using namespaces
 using std::string;
 using std::vector;
-
+using std::map;
 
 #endif
