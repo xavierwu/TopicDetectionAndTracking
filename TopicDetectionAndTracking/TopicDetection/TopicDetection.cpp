@@ -2,6 +2,6 @@
 
 void TopicDetection(vector<Story> &corpus)
 {
-	// you may need StoryLinkDetection()
+	// you may need isTwoStoriesSimilar() in 'StoryLinkDetection.h'
 	// TODO: topic detection
 }

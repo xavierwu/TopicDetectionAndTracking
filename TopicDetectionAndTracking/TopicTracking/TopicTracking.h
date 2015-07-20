@@ -5,7 +5,7 @@ news. */
 #ifndef TOPIC_TRACKING_H
 #define TOPIC_TRACKING_H
 
-#include "Story.h"
+#include "../Utilities/Story.h"
 
 /* OPTIONAL */
 void TopicTracking(const vector<Story> &corpus);

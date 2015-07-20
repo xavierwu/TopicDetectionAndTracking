@@ -1,83 +1,111 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="DataPreprocessing">
+      <UniqueIdentifier>{75752864-2e0e-460a-a006-9c0b443c71d7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    <Filter Include="TopicDetection">
+      <UniqueIdentifier>{42e02597-8f51-44fe-b40b-33cb85c1aeaf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="StoryLinkDetection">
+      <UniqueIdentifier>{6fbd771c-0bad-4b57-ade3-4e7460bd158f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utilities">
+      <UniqueIdentifier>{6d4f27ad-fa8e-4b9e-a7e6-b8478a3b848b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TopicTracking">
+      <UniqueIdentifier>{9ccaca02-3282-4b2c-b570-48b3e5c41d01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FirstStoryDetection">
+      <UniqueIdentifier>{03dd74de-969a-4a82-b0f3-a7afc3b76144}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Evaluation">
+      <UniqueIdentifier>{08c794f5-a96b-44b5-bd88-6c3f13f4ddee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Presentation">
+      <UniqueIdentifier>{c224464d-2218-4ec0-8e95-e2246c9a4793}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StorySegmentation">
+      <UniqueIdentifier>{21d15f13-f9bd-4737-a08d-7ae72ed78b83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dataset">
+      <UniqueIdentifier>{35fb326b-77f3-433a-ba56-1dd072240dc5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dataset\mttkn">
+      <UniqueIdentifier>{abe43947-a059-4b3f-aba9-a7c654140a8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dataset\mttkn_bnd">
+      <UniqueIdentifier>{d9b592ef-d0f1-4adf-a197-42af1df82f2c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="DataPreprocessing\DataPreprocessing.cpp">
+      <Filter>DataPreprocessing</Filter>
     </ClCompile>
-    <ClCompile Include="StorySegmentation.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="TopicDetection\TopicDetection.cpp">
+      <Filter>TopicDetection</Filter>
     </ClCompile>
-    <ClCompile Include="FirstStoryDetection.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="StoryLinkDetection\StoryLinkDetection.cpp">
+      <Filter>StoryLinkDetection</Filter>
     </ClCompile>
-    <ClCompile Include="StoryLinkDetection.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Utilities\Story.cpp">
+      <Filter>Utilities</Filter>
     </ClCompile>
-    <ClCompile Include="TopicDetection.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="TopicTracking\TopicTracking.cpp">
+      <Filter>TopicTracking</Filter>
     </ClCompile>
-    <ClCompile Include="TopicTracking.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="FirstStoryDetection\FirstStoryDetection.cpp">
+      <Filter>FirstStoryDetection</Filter>
     </ClCompile>
-    <ClCompile Include="Story.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Evaluation\Evaluation.cpp">
+      <Filter>Evaluation</Filter>
     </ClCompile>
-    <ClCompile Include="DataPreprocessing.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="StorySegmentation\StorySegmentation.cpp">
+      <Filter>StorySegmentation</Filter>
     </ClCompile>
-    <ClCompile Include="Evaluation.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Presentation\Presentation.cpp">
+      <Filter>Presentation</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="StorySegmentation.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="DataPreprocessing\DataPreprocessing.h">
+      <Filter>DataPreprocessing</Filter>
     </ClInclude>
-    <ClInclude Include="FirstStoryDetection.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="TopicDetection\TopicDetection.h">
+      <Filter>TopicDetection</Filter>
     </ClInclude>
-    <ClInclude Include="StoryLinkDetection.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="StoryLinkDetection\StoryLinkDetection.h">
+      <Filter>StoryLinkDetection</Filter>
     </ClInclude>
-    <ClInclude Include="TopicDetection.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Utilities\Story.h">
+      <Filter>Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="TopicTracking.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Utilities\Utilities.h">
+      <Filter>Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="Utilities.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="TopicTracking\TopicTracking.h">
+      <Filter>TopicTracking</Filter>
     </ClInclude>
-    <ClInclude Include="Story.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="FirstStoryDetection\FirstStoryDetection.h">
+      <Filter>FirstStoryDetection</Filter>
     </ClInclude>
-    <ClInclude Include="DataPreprocessing.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Evaluation\Evaluation.h">
+      <Filter>Evaluation</Filter>
     </ClInclude>
-    <ClInclude Include="Evaluation.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="StorySegmentation\StorySegmentation.h">
+      <Filter>StorySegmentation</Filter>
+    </ClInclude>
+    <ClInclude Include="Presentation\Presentation.h">
+      <Filter>Presentation</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="20030402_0530_0700_CNA_MAN.mttkn">
-      <Filter>Resource Files</Filter>
+    <None Include="Dataset\mttkn\20030402_0530_0700_CNA_MAN.mttkn">
+      <Filter>Dataset\mttkn</Filter>
     </None>
-    <None Include="20030402_0730_0930_XIN_MAN.mttkn_bnd">
-      <Filter>Resource Files</Filter>
+    <None Include="Dataset\mttkn_bnd\20030402_0530_0700_CNA_MAN.mttkn_bnd">
+      <Filter>Dataset\mttkn_bnd</Filter>
     </None>
   </ItemGroup>
 </Project>
