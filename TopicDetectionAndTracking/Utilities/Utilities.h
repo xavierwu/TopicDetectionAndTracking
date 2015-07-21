@@ -8,10 +8,15 @@ file again, since all other .h files would include this file. */
 #include <string>
 #include <vector>
 #include <map>
+#include <algorithm>
+#include <iostream>
 
 // please avoid using namespaces
 using std::string;
 using std::vector;
 using std::map;
+using std::cout;
+using std::cin;
+using std::endl;
 
 #endif

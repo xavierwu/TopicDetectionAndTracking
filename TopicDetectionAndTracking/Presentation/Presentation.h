@@ -3,6 +3,7 @@
 
 #include "../Utilities/Story.h"
 
-void Presentation (vector<Story> &firstStories);
+/* Simply print the firstStories for now. */
+void Presentation (const vector<Story> &firstStories, const vector<string> &glossary);
 
 #endif

@@ -15,11 +15,17 @@ private:
 	vector<int> words; // the index of each plain word, refer to the glossary
 	string timeStamp; // TODO: the format of date and time is not yet determined. 
 	int topicID = UNCLUSTERED;
+	// <word id, times it appears in this story>. Before using, make sure setWordsCount is invoked. 
+	map<int, int> wordsCount; 
+	// <word id, term frequency>. Before using, make sure setTermFrequency() is invoked. 
+	map<int, double> termFrequency; 
+	// <word id, tfidf>. Before using, make sure setTFIDF() is invoked
+	map<int, double> tfidf; 
 	//	vector<string> words_s; // unused since we have already the glossary and index of plain word. 
 
 public:
 	/* The first two parameters are necessary, so we dont use default constructor. */
-	Story (int storyID, const vector<int> words, const string &timeStamp = "", int topicID = UNCLUSTERED);
+	Story (int storyID, const vector<int> words, const string &timeStamp, int topicID = UNCLUSTERED);
 
 	/* Get 'storyID' */
 	int getStoryID () const;
@@ -49,16 +55,29 @@ public:
 	/* Set topicID */
 	void setTopicID (int topicID);
 
+	/* Get 'wordsCount', before using, you'd better call setWordsCount() first. */
+	void getWordsCount (map<int, int> &wordsCount) const;
+	/* Set 'wordsCount' */
+	void setWordsCount ();
+
+	/* Get 'termFrequency', before using, you'd better call setTermFrequency() first. */
+	void getTermFrequency (map<int, double> &termFrequency) const;
+	/* Set 'termFrequency' */
+	void setTermFrequency ();
+
+	/* Get 'tfidf', before using, you'd better call setTFIDF() first. */
+	void getTFIDF (map<int, double> &tfidf) const;
+	/* Set 'tfidf' */
+	void setTFIDF (const vector<Story> &corpus);
+
 	/* return the length of the story, i.e., the length of 'words' */
 	int getLength () const;
 
-	/* return a map, whose key is the wordID in the glossary and the value is
-	 the times a term appears in this story. */
-	void getTermCountMap (map<int, int> &termCountMap) const;
+	/* return true if this story contains a certain word. */
+	bool isWordExisted (int wordID) const;
 
-	/* termFrequenctMap would be set to include the frequency (in this story) of every word. 
-	The key is wordID, and the value is frequency. */
-	void getTermFrequencyMap (map<int, double> &termFrequencyMap) const;
+	/* return timestamp and words */
+	string toString (const vector<string> &glossary) const;
 };
 
 #endif

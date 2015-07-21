@@ -67,6 +67,9 @@
     <ClCompile Include="Presentation\Presentation.cpp">
       <Filter>Presentation</Filter>
     </ClCompile>
+    <ClCompile Include="Utilities\Utilities.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataPreprocessing\DataPreprocessing.h">

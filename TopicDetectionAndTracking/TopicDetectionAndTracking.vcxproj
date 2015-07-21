@@ -21,6 +21,7 @@
     <ClCompile Include="TopicDetection\TopicDetection.cpp" />
     <ClCompile Include="TopicTracking\TopicTracking.cpp" />
     <ClCompile Include="Utilities\Story.cpp" />
+    <ClCompile Include="Utilities\Utilities.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataPreprocessing\DataPreprocessing.h" />
