@@ -10,6 +10,8 @@ file again, since all other .h files would include this file. */
 #include <map>
 #include <algorithm>
 #include <iostream>
+#include <fstream>
+#include <cstdlib>
 
 // please avoid using namespaces
 using std::string;
@@ -18,5 +20,8 @@ using std::map;
 using std::cout;
 using std::cin;
 using std::endl;
+using std::ifstream;
+using std::ofstream;
+using std::ios;
 
 #endif
