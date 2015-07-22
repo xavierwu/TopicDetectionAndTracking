@@ -109,6 +109,9 @@ void Story::getTFIDF (map<int, double> &tfidf) const
 /* Set 'tfidf' */
 void Story::setTFIDF (const vector<Story> &corpus)
 {
+	if (this->termFrequency.empty ())
+		this->setTermFrequency ();
+
 	this->tfidf = this->termFrequency;
 	for (map<int, double>::iterator iter = this->tfidf.begin ();
 		 iter != this->tfidf.end (); ++iter) {

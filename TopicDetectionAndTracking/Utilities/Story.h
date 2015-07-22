@@ -11,9 +11,9 @@ const int UNCLUSTERED = -1; // Default value of topicID, it means the story is u
 class Story
 {
 private:
-	int storyID; // TODO: it might be same for two actually different stories, how to avoid it ?
+	int storyID;
 	vector<int> words; // the index of each plain word, refer to the glossary
-	string timeStamp; // TODO: the format of date and time is not yet determined. 
+	string timeStamp; // yyyymmdd.ttmm.XXX
 	int topicID = UNCLUSTERED;
 	// <word id, times it appears in this story>. Before using, make sure setWordsCount is invoked. 
 	map<int, int> wordsCount; 
