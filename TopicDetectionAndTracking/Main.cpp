@@ -21,7 +21,7 @@ int main (int argc, char **argv)
 	int numOfTopics = 0;
 	TopicDetection (corpus, numOfTopics);
 	FirstStoryDetection (firstStories, corpus, numOfTopics);
-//	Presentation (firstStories, glossary);
+	Presentation (firstStories, glossaryIntToString);
 
 	return 0;
 }

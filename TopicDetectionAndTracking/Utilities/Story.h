@@ -77,7 +77,7 @@ public:
 	bool isWordExisted (int wordID) const;
 
 	/* return timestamp and words */
-	string toString (const vector<string> &glossary) const;
+	string toString (const map<int, string> &glossary) const;
 
 	/* add word to words */
 	void addWord(int wordIndex);
