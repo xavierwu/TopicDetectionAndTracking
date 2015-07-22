@@ -146,3 +146,7 @@ string Story::toString (const vector<string> &glossary) const
 		result += " " + glossary[wordID];
 	return result;
 }
+
+void Story::addWord(int wordIndex){
+	words.push_back(wordIndex);
+}
