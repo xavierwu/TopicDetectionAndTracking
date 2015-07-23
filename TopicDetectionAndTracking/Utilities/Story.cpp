@@ -109,6 +109,9 @@ void Story::getTFIDF (map<int, double> &tfidf) const
 /* Set 'tfidf' */
 void Story::setTFIDF (const vector<Story> &corpus)
 {
+	if (this->termFrequency.empty ())
+		this->setTermFrequency ();
+
 	this->tfidf = this->termFrequency;
 	for (map<int, double>::iterator iter = this->tfidf.begin ();
 		 iter != this->tfidf.end (); ++iter) {
@@ -138,15 +141,17 @@ bool Story::isWordExisted (int wordID) const
 	}
 }
 
-string Story::toString (const vector<string> &glossary) const
+string Story::toString (const map<int, string> &glossary) const
 {
 	string result = "";
 	result += this->timeStamp;
 	for (const int wordID : this->words)
-		result += " " + glossary[wordID];
+		if (glossary.find (wordID) != glossary.cend ())
+			result += " " + glossary.find (wordID)->second;
 	return result;
 }
 
-void Story::addWord(int wordIndex){
-	words.push_back(wordIndex);
+void Story::addWord (int wordIndex)
+{
+	words.push_back (wordIndex);
 }
