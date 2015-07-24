@@ -12,6 +12,7 @@ file again, since all other .h files would include this file. */
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
+#include <assert.h>
 
 // please avoid using namespaces
 using std::string;

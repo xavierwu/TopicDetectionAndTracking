@@ -2,8 +2,7 @@
 
 void TopicDetection (vector<Story> &corpus, int &numOfTopics)
 {
-	// you may need isTwoStoriesSimilar() in 'StoryLinkDetection.h'
-	// TODO: topic detection
+	cout << "> Start TopicDetection......" << endl;
 
 	numOfTopics = 0;
 	for (std::vector<Story>::iterator iterUncategorized = corpus.begin ();
@@ -20,4 +19,5 @@ void TopicDetection (vector<Story> &corpus, int &numOfTopics)
 			}
 		}
 	}
+	cout << "> TopicDetection Done." << endl;
 }

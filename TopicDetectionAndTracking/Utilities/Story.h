@@ -16,11 +16,11 @@ private:
 	string timeStamp; // yyyymmdd.ttmm.XXX
 	int topicID = UNCLUSTERED;
 	// <word id, times it appears in this story>. Before using, make sure setWordsCount is invoked. 
-	map<int, int> wordsCount; 
+	map<int, int> wordsCount;
 	// <word id, term frequency>. Before using, make sure setTermFrequency() is invoked. 
-	map<int, double> termFrequency; 
+	map<int, double> termFrequency;
 	// <word id, tfidf>. Before using, make sure setTFIDF() is invoked
-	map<int, double> tfidf; 
+	map<int, double> tfidf;
 	//	vector<string> words_s; // unused since we have already the glossary and index of plain word. 
 
 public:
@@ -80,7 +80,10 @@ public:
 	string toString (const map<int, string> &glossary) const;
 
 	/* add word to words */
-	void addWord(int wordIndex);
+	void addWord (int wordIndex);
+
+	/* Set 'tfidf' for all stories in corpus. */
+	static void setTFIDFOfCorpus (vector<Story> &corpus);
 };
 
 #endif

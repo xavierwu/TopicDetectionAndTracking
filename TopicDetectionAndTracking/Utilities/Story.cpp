@@ -106,7 +106,7 @@ void Story::getTFIDF (map<int, double> &tfidf) const
 	tfidf = this->tfidf;
 }
 
-/* Set 'tfidf' */
+/* Set 'tfidf', based on corpus */
 void Story::setTFIDF (const vector<Story> &corpus)
 {
 	if (this->termFrequency.empty ())
@@ -154,4 +154,15 @@ string Story::toString (const map<int, string> &glossary) const
 void Story::addWord (int wordIndex)
 {
 	words.push_back (wordIndex);
+}
+
+void Story::setTFIDFOfCorpus (vector<Story> &corpus)
+{
+	cout << ">> Start calculating tfidf of corpus......" << endl;
+	for (unsigned count = 0; count < corpus.size (); ++count) {
+		if (count % 10 == 0)
+			cout << count << " / " << corpus.size () << endl;
+		corpus[count].setTFIDF (corpus);
+	}
+	cout << ">> Calculating tfidf's done." << endl;
 }

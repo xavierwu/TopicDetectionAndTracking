@@ -5,23 +5,17 @@ void DataPreprocessing (vector<Story> &corpus,
 						map<int, string> &glossaryIntToString, map<string, int> &glossaryStringToInt,
 						const string &tkn_file, const string &bnd_file, bool isWithStemmer)
 {
+	cout << "> Start DataPreprocessing......" << endl;
 	readCorpus (corpus, glossaryIntToString, glossaryStringToInt, tkn_file, bnd_file, isWithStemmer);
-	for (Story &story : corpus)
-		story.setTFIDF (corpus);
-
-	//cout << "Start setting tfidf... " << endl;
-	//for (int i = 0; i < corpus.size (); ++i) {
-	//	if (i % 5 == 0)
-	//		cout << i << " / " << corpus.size () << endl;
-	//	corpus[i].setTFIDF (corpus);
-	//}
-	//cout << "Done." << endl;
+	Story::setTFIDFOfCorpus (corpus);
+	cout << "> DataPreprocessing Done." << endl;
 }
 
 void readCorpus (vector<Story> &corpus,
 				 map<int, string> &glossaryIntToString, map<string, int> &glossaryStringToInt,
 				 const string &tkn_file, const string &bnd_file, bool isWithStemmer)
 {
+	cout << ">> Start reading corpus......" << endl;
 	if (!isWithStemmer) {
 		// the id of the first and the last words of a story
 		vector<int> Brecid;
@@ -32,6 +26,7 @@ void readCorpus (vector<Story> &corpus,
 		readTknFile (corpus, tkn_file, Brecid, Erecid, glossaryIntToString, glossaryStringToInt);
 	} else { // OPTIONAL
 	}
+	cout << ">> Reading corpus done." << endl;
 }
 
 void readBndFile (vector<Story> &corpus, const string &bnd_file, vector<int> &Brecid,
