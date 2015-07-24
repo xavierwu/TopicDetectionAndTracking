@@ -6,12 +6,15 @@ and the creation of bins is an unsupervised task. */
 
 #include "../StoryLinkDetection/StoryLinkDetection.h"
 
-/* Threshold for clustering. */
-static double threshold = 0.8;  // TODO: to be modified
-
 /* Cluster stories into topics.
 Input: corpus
-Output: corpus, with 'topicId' set. */
+Output: corpus, with 'topicID' set. */
 void TopicDetection (vector<Story> &corpus, int &numOfTopics);
+
+/* Naive clustering, simply cluster two stories to be of same topic, if the similarity is above threshold.
+Input: corpus, threshold
+Output: numOfTopics, corpus[].topicID
+*/
+void NaiveClustering (vector<Story> &corpus, int &numOfTopics, const double &threshold);
 
 #endif

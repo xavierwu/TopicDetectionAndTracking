@@ -156,6 +156,11 @@ void Story::addWord (int wordIndex)
 	words.push_back (wordIndex);
 }
 
+bool Story::isClustered () const
+{
+	return topicID != UNCLUSTERED;
+}
+
 void Story::setTFIDFOfCorpus (vector<Story> &corpus)
 {
 	cout << ">> Start calculating tfidf of corpus......" << endl;

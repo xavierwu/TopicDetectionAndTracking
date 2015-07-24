@@ -82,6 +82,9 @@ public:
 	/* add word to words */
 	void addWord (int wordIndex);
 
+	/* return true if the story is already clustered. */
+	bool isClustered () const;
+
 	/* Set 'tfidf' for all stories in corpus. */
 	static void setTFIDFOfCorpus (vector<Story> &corpus);
 };
