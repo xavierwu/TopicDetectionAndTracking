@@ -110,5 +110,8 @@
     <None Include="Dataset\mttkn_bnd\20030402_0530_0700_CNA_MAN.mttkn_bnd">
       <Filter>Dataset\mttkn_bnd</Filter>
     </None>
+    <None Include="Dataset\tfidf.dat">
+      <Filter>Dataset</Filter>
+    </None>
   </ItemGroup>
 </Project>

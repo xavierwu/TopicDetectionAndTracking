@@ -17,4 +17,5 @@ Output: numOfTopics, corpus[].topicID
 */
 void NaiveClustering (vector<Story> &corpus, int &numOfTopics, const double &threshold);
 
+
 #endif

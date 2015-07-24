@@ -69,6 +69,7 @@ public:
 	void getTFIDF (map<int, double> &tfidf) const;
 	/* Set 'tfidf' */
 	void setTFIDF (const vector<Story> &corpus);
+	void copyTFIDF (const map<int, double> &tfidf);
 
 	/* return the length of the story, i.e., the length of 'words' */
 	int getLength () const;
@@ -87,6 +88,11 @@ public:
 
 	/* Set 'tfidf' for all stories in corpus. */
 	static void setTFIDFOfCorpus (vector<Story> &corpus);
+	/* Save the tfidf's of corpus to tfidfFile */
+	static void saveTFIDF (const vector<Story> &corpus, const string &tfidfFile);
+	/* Load the tfidf's of corpus from tfidfFile */
+	static void loadTFIDF (vector<Story> &corpus, const string &tfidfFile);
+
 };
 
 #endif

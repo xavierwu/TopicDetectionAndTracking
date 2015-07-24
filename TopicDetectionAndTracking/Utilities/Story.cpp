@@ -125,6 +125,12 @@ void Story::setTFIDF (const vector<Story> &corpus)
 	}
 }
 
+void Story::copyTFIDF (const map<int, double> &tfidf)
+{
+	this->tfidf.clear ();
+	this->tfidf = tfidf;
+}
+
 int Story::getLength () const
 {
 	return this->words.size ();
@@ -170,4 +176,47 @@ void Story::setTFIDFOfCorpus (vector<Story> &corpus)
 		corpus[count].setTFIDF (corpus);
 	}
 	cout << ">> Calculating tfidf's done." << endl;
+}
+
+/* Save the tfidf's of corpus to tfidfFile */
+void Story::saveTFIDF (const vector<Story> &corpus, const string &tfidfFile)
+{
+	cout << "> Start saving tfidf......" << endl;
+	ofstream fout (tfidfFile, ios::out);
+	for (const Story &story : corpus) {
+		map<int, double> tfidf;
+		story.getTFIDF (tfidf);
+		for (map<int, double>::const_iterator citer = tfidf.cbegin ();
+			 citer != tfidf.cend (); ++citer)
+			 fout << citer->first << ":" << citer->second << " ";
+		fout << endl;
+	}
+	fout.close ();
+	cout << "> Saving tfidf done. " << endl;
+}
+
+/* Load the tfidf's of corpus from tfidfFile */
+void Story::loadTFIDF (vector<Story> &corpus, const string &tfidfFile)
+{
+	cout << "> Start loading tfidf......" << endl;
+	ifstream fin (tfidfFile, ios::in);
+	string line = "";
+	map<int, double> tfidf;
+	stringstream ss;
+	int key;
+	double value;
+	int i = 0;
+	while (std::getline (fin, line)) {
+		tfidf.clear ();
+		ss.clear ();
+		ss << line;
+		while (ss >> key) {
+			ss.get ();
+			ss >> value;
+			tfidf[key] = value;
+		}
+		corpus[i++].copyTFIDF (tfidf);
+	}
+	fin.close ();
+	cout << "> Loading tfidf done. " << endl;
 }

@@ -6,16 +6,16 @@ void FirstStoryDetection (vector<Story> &firstStories, const vector<Story> &corp
 	cout << "> Start FirstStoryDetection......" << endl;
 	for (int curTopic = 0; curTopic != numOfTopics; ++curTopic) {
 		const Story *firstStoryOfCurTopic = nullptr;
-		for (Story curStory : corpus) {
+		for (const Story &curStory : corpus) {
 			if (curStory.getTopicID () == curTopic) {
 				if (firstStoryOfCurTopic == nullptr)
-					firstStoryOfCurTopic = &curStory;
+					firstStoryOfCurTopic = new Story(curStory);
 				else if (curStory.getTimeStamp () < firstStoryOfCurTopic->getTimeStamp ())
-					firstStoryOfCurTopic = &curStory;
+					firstStoryOfCurTopic = new Story (curStory);
 			}
 		}
 		assert (firstStoryOfCurTopic != nullptr);
-		firstStories.push_back (Story (*firstStoryOfCurTopic));
+		firstStories.push_back (*firstStoryOfCurTopic);
 	}
 	cout << "> FirstStoryDetection Done." << endl;
 }

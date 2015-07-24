@@ -7,7 +7,8 @@ void DataPreprocessing (vector<Story> &corpus,
 {
 	cout << "> Start DataPreprocessing......" << endl;
 	readCorpus (corpus, glossaryIntToString, glossaryStringToInt, tkn_file, bnd_file, isWithStemmer);
-	Story::setTFIDFOfCorpus (corpus);
+	Story::loadTFIDF (corpus, "Dataset/tfidf.dat");
+//	Story::setTFIDFOfCorpus (corpus);
 	cout << "> DataPreprocessing Done." << endl;
 }
 

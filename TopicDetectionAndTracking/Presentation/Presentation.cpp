@@ -4,6 +4,6 @@ void Presentation (const vector<Story> &firstStories, const map<int, string> &gl
 {
 	cout << "> Start presenting......" << endl;
 	for (const Story curStory : firstStories)
-		cout << curStory.getTopicID () << " " << curStory.toString (glossary) << endl;
+		cout << curStory.getTopicID () << "\n" << curStory.toString (glossary) << endl;
 	cout << "> Presenting done. " << endl;
 }

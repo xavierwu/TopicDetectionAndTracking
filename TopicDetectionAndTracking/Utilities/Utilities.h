@@ -13,6 +13,7 @@ file again, since all other .h files would include this file. */
 #include <fstream>
 #include <cstdlib>
 #include <assert.h>
+#include <sstream>
 
 // please avoid using namespaces
 using std::string;
@@ -24,5 +25,6 @@ using std::endl;
 using std::ifstream;
 using std::ofstream;
 using std::ios;
+using std::stringstream;
 
 #endif

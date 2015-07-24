@@ -17,6 +17,7 @@ int main (int argc, char **argv)
 	string bnd_file = "Dataset/mttkn_bnd/20030402_0530_0700_CNA_MAN.mttkn_bnd";
 
 	DataPreprocessing (corpus, glossaryIntToString, glossaryStringToInt, tkn_file, bnd_file);
+	//	Story::saveTFIDF (corpus, "Dataset/tfidf.dat");
 
 	int numOfTopics = 0;
 	TopicDetection (corpus, numOfTopics);
