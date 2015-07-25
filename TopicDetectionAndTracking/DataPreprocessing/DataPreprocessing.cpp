@@ -8,7 +8,7 @@ void DataPreprocessing (vector<Story> &corpus,
 	cout << "> Start DataPreprocessing......" << endl;
 	readCorpus (corpus, glossaryIntToString, glossaryStringToInt, tkn_file, bnd_file, isWithStemmer);
 	Story::loadTFIDF (corpus, "Dataset/tfidf.dat");
-//	Story::setTFIDFOfCorpus (corpus);
+	//	Story::setTFIDFOfCorpus (corpus);
 	cout << "> DataPreprocessing Done." << endl;
 }
 
@@ -69,17 +69,15 @@ void readBndFile (vector<Story> &corpus, const string &bnd_file, vector<int> &Br
 		// point to the real Brecid and Erecid
 		char *pid;
 
-		// if you don't use pNext, you will get an error while compiling, so just use it
-		char *pNext = NULL;
+		pid = strtok (BrecidWithRedundancy, split);
+		pid = strtok (NULL, split);
 
-		pid = strtok_s (BrecidWithRedundancy, split, &pNext);
-		pid = strtok_s (NULL, split, &pNext);
 		// convert char* to int
 		BrecidInt = atoi (pid);
 
-		*pNext = NULL;
-		pid = strtok_s (ErecidWithRedundancy, split, &pNext);
-		pid = strtok_s (NULL, split, &pNext);
+		pid = strtok (ErecidWithRedundancy, split);
+		pid = strtok (NULL, split);
+
 		ErecidInt = atoi (pid);
 
 		vector<int> words;
