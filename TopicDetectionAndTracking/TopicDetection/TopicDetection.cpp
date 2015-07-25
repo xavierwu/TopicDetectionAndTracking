@@ -112,13 +112,13 @@ Story getMean(const vector<Story> &corpus, const int &topicID) {
     return mean;
 }
 
-void cluster(Story &story, const vector<Story> &means) {
-    int minSimilarity = 0;
+void cluster(Story &story, const vector<Story> &means, const int &numOfTopics) {
+    int maxSimilarity = 0;
     
-    for (unsigned int i = 0; i < means.size(); i++) {
+    for (unsigned int i = 0; i < numOfTopics; i++) {
         int similarity = getSimilarity(story, means[i]);	// TODO:
-        if (similarity > minSimilarity) {
-            minSimilarity = similarity;
+        if (similarity > maxSimilarity) {
+            maxSimilarity = similarity;
             story.setTopicID(i);
         }
     }
