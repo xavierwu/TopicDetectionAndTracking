@@ -14,6 +14,8 @@ file again, since all other .h files would include this file. */
 #include <cstdlib>
 #include <assert.h>
 #include <sstream>
+#include <cmath>
+#include <cstring>
 
 // please avoid using namespaces
 using std::string;

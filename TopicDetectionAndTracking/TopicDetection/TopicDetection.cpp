@@ -41,12 +41,13 @@ void NaiveClustering (vector<Story> &corpus, int &numOfTopics, const double &thr
 }
 
 void KMeans(vector<Story> &corpus, int &numOfTopics) {
-//    vector< map<int, double> > means;
-    vector<Story> means;
+//  vector< map<int, double> > means;
+    vector<Story> means;	// centers
     
     initMeans(means, corpus, numOfTopics);
     
-    int loopCnt = 10;
+    int loopCnt = 10;	// Kmeans loop execution counter, set to 10 temporarily
+
     while (loopCnt) {
         for (int i = 0; i < numOfTopics; i++) {
             means[i] = getMean(corpus, i);
@@ -70,7 +71,7 @@ void initMeans(vector<Story> &means, const vector<Story> &corpus, const int &num
 }
 
 Story getMean(const vector<Story> &corpus, const int &topicID) {
-    map<int, double> mean;
+//    map<int, double> mean;
     Story mean;
     int storyNumOfTopic = 0;
     
@@ -89,17 +90,17 @@ Story getMean(const vector<Story> &corpus, const int &topicID) {
                 } else {
                     tfidfOfMean.insert(std::pair<int, double> (it->first, it->second));
                 }
-                mean.setTFIDF(tfidfOfMean);
+                mean.copyTFIDF(tfidfOfMean);
             }
         }
     }
     
 	map<int, double> tfidfOfMean;
 	mean.getTFIDF(tfidfOfMean);
-    for (map<int, double>::iterator it = tfidf.begin(); it != tfidf.end(); it++) {
+    for (map<int, double>::iterator it = tfidfOfMean.begin(); it != tfidfOfMean.end(); it++) {
         it->second /= storyNumOfTopic;
     }
-    mean.setTFIDF(tfidfOfMean);
+    mean.copyTFIDF(tfidfOfMean);
 
     return mean;
 }
