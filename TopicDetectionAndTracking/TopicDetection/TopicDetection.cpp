@@ -65,8 +65,8 @@ void KMeans(vector<Story> &corpus, int &numOfTopics) {
 
 void initMeans(vector<Story> &means, const vector<Story> &corpus, const int &numOfTopics) {
     for (int i = 0; i < numOfTopics; i++) {
-//        map<int, double> tfidf;
-//        corpus[i].(tfidf);
+//      map<int, double> tfidf;
+//      corpus[i].(tfidf);
         means[i] = corpus[i];
     }
 }
