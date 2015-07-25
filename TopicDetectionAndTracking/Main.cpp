@@ -18,6 +18,7 @@ int main (int argc, char **argv)
 
 	DataPreprocessing (corpus, glossaryIntToString, glossaryStringToInt, tkn_file, bnd_file);
 	//	Story::saveTFIDF (corpus, "Dataset/tfidf.dat");
+	assert (corpus.size() > 0);
 
 	int numOfTopics = 0;
 	TopicDetection (corpus, numOfTopics);
@@ -25,7 +26,7 @@ int main (int argc, char **argv)
 
 	FirstStoryDetection (firstStories, corpus, numOfTopics);
 
-	Presentation (firstStories, glossaryIntToString);
+	Presentation (firstStories, corpus, glossaryIntToString, numOfTopics);
 
 	return 0;
 }
