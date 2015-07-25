@@ -42,85 +42,89 @@ void NaiveClustering (vector<Story> &corpus, int &numOfTopics, const double &thr
 	cout << ">> NaiveClustering done." << endl;
 }
 
-void KMeans(vector<Story> &corpus, int &numOfTopics) {
-//  vector< map<int, double> > means;
-    vector<Story> means;	// centers
-    
-    initMeans(means, corpus, numOfTopics);
-    
-    int loopCnt = 10;	// Kmeans loop execution counter, set to 10 temporarily
+void KMeans (vector<Story> &corpus, int &numOfTopics)
+{
+	//  vector< map<int, double> > means;
+	vector<Story> means;	// centers
 
-    while (loopCnt) {
-    	// label clusters
-        for (unsigned int i = 0; i < corpus.size(); i++) {
-            cluster(corpus[i], means, numOfTopics);
-        }
+	initMeans (means, corpus, numOfTopics);
 
-    	// Calculate centers
-        for (int i = 0; i < numOfTopics; i++) {
-            means[i] = getMean(corpus, i);
-        }
-        
-        loopCnt--;
-    }
-    
+	int loopCnt = 10;	// Kmeans loop execution counter, set to 10 temporarily
+
+	while (loopCnt) {
+		// label clusters
+		for (unsigned int i = 0; i < corpus.size (); i++) {
+			cluster (corpus[i], means, numOfTopics);
+		}
+
+		// Calculate centers
+		for (int i = 0; i < numOfTopics; i++) {
+			means[i] = getMean (corpus, i);
+		}
+
+		loopCnt--;
+	}
+
 }
 
-void initMeans(vector<Story> &means, const vector<Story> &corpus, const int &numOfTopics) {
+void initMeans (vector<Story> &means, const vector<Story> &corpus, const int &numOfTopics)
+{
 
-    for (int i = 0; i < numOfTopics; i++) {
-//      map<int, double> tfidf;
-//      corpus[i].(tfidf);
-    	assert(i >= 0 && i < numOfTopics);
-        means.push_back(corpus[i]);	// set initial centers to several stories, for temporary.
-    }
+	for (int i = 0; i < numOfTopics; i++) {
+		//      map<int, double> tfidf;
+		//      corpus[i].(tfidf);
+		assert (i >= 0 && i < numOfTopics);
+		means.push_back (corpus[i]);	// set initial centers to several stories, for temporary.
+	}
 }
 
-Story getMean(const vector<Story> &corpus, const int &topicID) {
-//  map<int, double> mean;
-    Story mean;
-    int storyNumOfTopic = 0;
-    
-    // Add all TF-IDF value to mean
-    for (unsigned int i = 0; i < corpus.size(); i++) {
-        if (corpus[i].getTopicID() == topicID) {
-            storyNumOfTopic++;
-            
-            map<int, double> tfidf;
-            corpus[i].getTFIDF(tfidf);
-            
-            for (map<int, double>::const_iterator it = tfidf.cbegin(); it != tfidf.cend(); it++) {
-            	map<int, double> tfidfOfMean;
-            	mean.getTFIDF(tfidfOfMean);
-                if (tfidfOfMean.find(it->first) != tfidfOfMean.cend()) {
-                    tfidfOfMean[it->first] += it->second;
-                } else {
-                    tfidfOfMean.insert(std::pair<int, double> (it->first, it->second));
-                }
-                mean.copyTFIDF(tfidfOfMean);
-            }
-        }
-    }
-    
+Story getMean (const vector<Story> &corpus, const int &topicID)
+{
+	//  map<int, double> mean;
+	Story mean;
+	int storyNumOfTopic = 0;
+
+	// Add all TF-IDF value to mean
+	for (unsigned int i = 0; i < corpus.size (); i++) {
+		if (corpus[i].getTopicID () == topicID) {
+			storyNumOfTopic++;
+
+			map<int, double> tfidf;
+			corpus[i].getTFIDF (tfidf);
+
+			for (map<int, double>::const_iterator it = tfidf.cbegin (); it != tfidf.cend (); it++) {
+				map<int, double> tfidfOfMean;
+				mean.getTFIDF (tfidfOfMean);
+				if (tfidfOfMean.find (it->first) != tfidfOfMean.cend ()) {
+					tfidfOfMean[it->first] += it->second;
+				} else {
+					tfidfOfMean.insert (std::pair<int, double> (it->first, it->second));
+				}
+				mean.setTFIDF (tfidfOfMean);
+			}
+		}
+	}
+
 	map<int, double> tfidfOfMean;
-	mean.getTFIDF(tfidfOfMean);
-    for (map<int, double>::iterator it = tfidfOfMean.begin(); it != tfidfOfMean.end(); it++) {
-        it->second /= storyNumOfTopic;
-    }
-    mean.copyTFIDF(tfidfOfMean);
+	mean.getTFIDF (tfidfOfMean);
+	for (map<int, double>::iterator it = tfidfOfMean.begin (); it != tfidfOfMean.end (); it++) {
+		it->second /= storyNumOfTopic;
+	}
+	mean.setTFIDF (tfidfOfMean);
 
-    return mean;
+	return mean;
 }
 
-void cluster(Story &story, const vector<Story> &means, const int &numOfTopics) {
-    double maxSimilarity = 0;
-    
-    for (unsigned int i = 0; i < numOfTopics; i++) {
+void cluster (Story &story, const vector<Story> &means, const int &numOfTopics)
+{
+	double maxSimilarity = 0;
+
+	for (int i = 0; i < numOfTopics; i++) {
 		double similarity = getSimilarity (story, means[i]);
 		//cout << "sim of " << i << " = " << similarity << endl;
-        if (similarity > maxSimilarity) {
-            maxSimilarity = similarity;
-            story.setTopicID(i);
-        }
-    }
+		if (similarity > maxSimilarity) {
+			maxSimilarity = similarity;
+			story.setTopicID (i);
+		}
+	}
 }

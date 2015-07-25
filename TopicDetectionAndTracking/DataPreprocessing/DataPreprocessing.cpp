@@ -3,20 +3,28 @@
 /* Set 'corpus' and 'glossary', and do some other preprocessing */
 void DataPreprocessing (vector<Story> &corpus,
 						map<int, string> &glossaryIntToString, map<string, int> &glossaryStringToInt,
-						const string &tkn_file, const string &bnd_file, bool isWithStemmer)
+						const string &tkn_file, const string &bnd_file, const bool &isWithStemmer)
 {
 	cout << "> Start DataPreprocessing......" << endl;
+
 	readCorpus (corpus, glossaryIntToString, glossaryStringToInt, tkn_file, bnd_file, isWithStemmer);
-	Story::loadTFIDF (corpus, "Dataset/tfidf.dat");
+
+	/* Calculate the tfidf, and save it. */
 	//	Story::setTFIDFOfCorpus (corpus);
+	//	Story::saveTFIDF (corpus, "Dataset/tfidf.dat");
+
+	/* Load the tfidf from file, pls make sure the file exist.  */
+	Story::loadTFIDF (corpus, "Dataset/tfidf.dat");
+
 	cout << "> DataPreprocessing Done." << endl;
 }
 
 void readCorpus (vector<Story> &corpus,
 				 map<int, string> &glossaryIntToString, map<string, int> &glossaryStringToInt,
-				 const string &tkn_file, const string &bnd_file, bool isWithStemmer)
+				 const string &tkn_file, const string &bnd_file, const bool &isWithStemmer)
 {
 	cout << ">> Start reading corpus......" << endl;
+
 	if (!isWithStemmer) {
 		// the id of the first and the last words of a story
 		vector<int> Brecid;
@@ -25,8 +33,9 @@ void readCorpus (vector<Story> &corpus,
 		readBndFile (corpus, bnd_file, Brecid, Erecid);
 
 		readTknFile (corpus, tkn_file, Brecid, Erecid, glossaryIntToString, glossaryStringToInt);
-	} else { // OPTIONAL
+	} else { // TODO: (optional) add a stemmer to the readCorpus(...) ?
 	}
+
 	cout << ">> Reading corpus done." << endl;
 }
 
@@ -36,6 +45,7 @@ void readBndFile (vector<Story> &corpus, const string &bnd_file, vector<int> &Br
 	int numOfStories = 0;
 
 	ifstream fin (bnd_file, ios::in);
+	assert (fin.is_open ());
 
 	// the first line is title, and it is of no use, so try to work hard to be a useful man
 	string titleUseless;
@@ -93,11 +103,12 @@ void readBndFile (vector<Story> &corpus, const string &bnd_file, vector<int> &Br
 }
 
 void readTknFile (vector<Story> &corpus, const string &tkn_file,
-				  vector<int> &Brecid, vector<int> &Erecid,
+				  const vector<int> &Brecid, const vector<int> &Erecid,
 				  map<int, string> &glossaryIntToString, map<string, int> &glossaryStringToInt)
 {
 
 	ifstream fin (tkn_file, ios::in);
+	assert (fin.is_open ());
 
 	// the first line is title, and it is of no use, so try to work hard again to be a useful man
 	string titleUseless;
@@ -148,7 +159,8 @@ void processWord (string &word)
 	}
 }
 
-void addWordToGlossary (string word, map<int, string> &glossaryIntToString, map<string, int> &glossaryStringToInt)
+void addWordToGlossary (const string &word, map<int, string> &glossaryIntToString,
+						map<string, int> &glossaryStringToInt)
 {
 	if (glossaryStringToInt.find (word) == glossaryStringToInt.end ()) {
 		int index = glossaryStringToInt.size ();

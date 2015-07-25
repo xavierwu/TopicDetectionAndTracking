@@ -6,30 +6,33 @@ the system. If there is any change of directory 'Utilities', notify all authors.
 
 #include "Utilities.h"
 
-const int UNCLUSTERED = -1; // Default value of topicID, it means the story is unclusered. 
-const int DEFAULT_STORY_ID = -1;
+/* Default value of 'topicID', meaning the story is clustered.
+Please AVOID using it outside 'Story.h' and 'Story.cpp'. */
+#define DEFAULT_TOPIC_ID -1
+/* Default value of 'storyID', meaning the story is just a tmp story.
+Please AVOID using it outside 'Story.h' and 'Story.cpp'. */
+#define DEFAULT_STORY_ID -1
 
 class Story
 {
 private:
-	int storyID;
+	int storyID = DEFAULT_STORY_ID;
 	vector<int> words; // the index of each plain word, refer to the glossary
 	string timeStamp; // yyyymmdd.ttmm.XXX
-	int topicID = UNCLUSTERED;
+	int topicID = DEFAULT_TOPIC_ID;
 	// <word id, times it appears in this story>. Before using, make sure setWordsCount is invoked. 
 	map<int, int> wordsCount;
 	// <word id, term frequency>. Before using, make sure setTermFrequency() is invoked. 
 	map<int, double> termFrequency;
-	// <word id, tfidf>. Before using, make sure setTFIDF() is invoked
+	// <word id, tfidf>. Before using, make sure setTFIDFBasedOnCorpus() is invoked
 	map<int, double> tfidf;
 	//	vector<string> words_s; // unused since we have already the glossary and index of plain word. 
 
 public:
-	/* The first two parameters are necessary, so we dont use default constructor. */
-	Story (int storyID, const vector<int> words, const string &timeStamp, int topicID = UNCLUSTERED);
-
-	/* Default constructor. */
+	/* UNSUGGESTED: Default constructor. */
 	Story ();
+	/* The first two parameters are necessary */
+	Story (int storyID, vector<int> words, string timeStamp);
 
 	/* Get 'storyID' */
 	int getStoryID () const;
@@ -69,23 +72,24 @@ public:
 	/* Set 'termFrequency' */
 	void setTermFrequency ();
 
-	/* Get 'tfidf', before using, you'd better call setTFIDF() first. */
+	/* Get 'tfidf', before using, you'd better call setTFIDFBasedOnCorpus() first. */
 	void getTFIDF (map<int, double> &tfidf) const;
 	/* Set 'tfidf' */
-	void setTFIDF (const vector<Story> &corpus);
-	void copyTFIDF (const map<int, double> &tfidf);
+	void setTFIDF (const map<int, double> &tfidf);
+	/* To calculate tfidf for a certain story, we have to refer to a corpus. */
+	void setTFIDFBasedOnCorpus (const vector<Story> &corpus);
+
+	/* add word to 'words' */
+	void addWord (int wordIndex);
 
 	/* return the length of the story, i.e., the length of 'words' */
 	int getLength () const;
 
-	/* return true if this story contains a certain word. */
-	bool isWordExisted (int wordID) const;
-
 	/* return timestamp and words */
 	string toString (const map<int, string> &glossary) const;
 
-	/* add word to words */
-	void addWord (int wordIndex);
+	/* return true if this story contains a certain word. */
+	bool isWordExisted (int wordID) const;
 
 	/* return true if the story is already clustered. */
 	bool isClustered () const;
@@ -96,7 +100,6 @@ public:
 	static void saveTFIDF (const vector<Story> &corpus, const string &tfidfFile);
 	/* Load the tfidf's of corpus from tfidfFile */
 	static void loadTFIDF (vector<Story> &corpus, const string &tfidfFile);
-
 };
 
 #endif

@@ -11,7 +11,7 @@ Output: return true/false */
 bool isTwoStoriesSimilar(const Story &story1, const Story &story2, double threshold);
 
 /* Return the similarities between any two stories.
-REQUIRE: call setTFIDF() before using the stories as parameters.
+REQUIRE: call setTFIDFBasedOnCorpus() before using the stories as parameters.
 NOTE: we simply use getCosineSimilarity() for now. 
 Input: 'story1', 'story2'
 Output: similarity */
