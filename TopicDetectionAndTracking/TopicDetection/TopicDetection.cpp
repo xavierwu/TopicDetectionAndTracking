@@ -4,7 +4,8 @@ void TopicDetection (vector<Story> &corpus, int &numOfTopics)
 {
 	cout << "> Start TopicDetection......" << endl;
 
-	NaiveClustering (corpus, numOfTopics, 0.5);
+	KMeans (corpus, numOfTopics);
+	//NaiveClustering (corpus, numOfTopics, 0.5);
 
 	cout << "> TopicDetection Done." << endl;
 }
