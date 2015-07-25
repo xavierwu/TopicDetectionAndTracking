@@ -7,6 +7,7 @@ the system. If there is any change of directory 'Utilities', notify all authors.
 #include "Utilities.h"
 
 const int UNCLUSTERED = -1; // Default value of topicID, it means the story is unclusered. 
+const int DEFAULT_STORY_ID = -1;
 
 class Story
 {
@@ -26,6 +27,9 @@ private:
 public:
 	/* The first two parameters are necessary, so we dont use default constructor. */
 	Story (int storyID, const vector<int> words, const string &timeStamp, int topicID = UNCLUSTERED);
+
+	/* Default constructor. */
+	Story ();
 
 	/* Get 'storyID' */
 	int getStoryID () const;

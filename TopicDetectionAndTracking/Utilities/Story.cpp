@@ -5,6 +5,10 @@ Story::Story (int storyID, const vector<int> words, const string &timeStamp, int
 {
 }
 
+Story::Story () {
+	storyID = DEFAULT_STORY_ID;
+}
+
 int Story::getStoryID () const
 {
 	return this->storyID;
