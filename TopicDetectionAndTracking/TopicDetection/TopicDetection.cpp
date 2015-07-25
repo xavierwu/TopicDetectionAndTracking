@@ -67,15 +67,17 @@ void KMeans(vector<Story> &corpus, int &numOfTopics) {
 }
 
 void initMeans(vector<Story> &means, const vector<Story> &corpus, const int &numOfTopics) {
+
     for (int i = 0; i < numOfTopics; i++) {
 //      map<int, double> tfidf;
 //      corpus[i].(tfidf);
-        means[i] = corpus[i];	// set initial centers to several stories, for temporary.
+    	assert(i >= 0 && i < numOfTopics);
+        means.push_back(corpus[i]);	// set initial centers to several stories, for temporary.
     }
 }
 
 Story getMean(const vector<Story> &corpus, const int &topicID) {
-//    map<int, double> mean;
+//  map<int, double> mean;
     Story mean;
     int storyNumOfTopic = 0;
     
