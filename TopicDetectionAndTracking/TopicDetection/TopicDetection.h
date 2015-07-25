@@ -43,6 +43,6 @@ Story getMean(const vector<Story> &corpus, const int &topicID);
  * Input: story, means
  * Output: story with a certain topicID
  */
-void cluster(Story &story, const vector<Story> &means);
+void cluster(Story &story, const vector<Story> &means, const int &numOfTopicss);
 
 #endif
