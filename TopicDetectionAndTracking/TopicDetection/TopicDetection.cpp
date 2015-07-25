@@ -49,6 +49,7 @@ void KMeans(vector<Story> &corpus, int &numOfTopics) {
     int loopCnt = 10;	// Kmeans loop execution counter, set to 10 temporarily
 
     while (loopCnt) {
+    	// Calculate centers
         for (int i = 0; i < numOfTopics; i++) {
             means[i] = getMean(corpus, i);
         }
