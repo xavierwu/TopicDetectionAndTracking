@@ -53,7 +53,7 @@ void KMeans(vector<Story> &corpus, int &numOfTopics) {
     while (loopCnt) {
     	// label clusters
         for (unsigned int i = 0; i < corpus.size(); i++) {
-            cluster(corpus[i], means);
+            cluster(corpus[i], means, numOfTopics);
         }
 
     	// Calculate centers
@@ -113,10 +113,11 @@ Story getMean(const vector<Story> &corpus, const int &topicID) {
 }
 
 void cluster(Story &story, const vector<Story> &means, const int &numOfTopics) {
-    int maxSimilarity = 0;
+    double maxSimilarity = 0;
     
     for (unsigned int i = 0; i < numOfTopics; i++) {
-        int similarity = getSimilarity(story, means[i]);	// TODO:
+		double similarity = getSimilarity (story, means[i]);
+		//cout << "sim of " << i << " = " << similarity << endl;
         if (similarity > maxSimilarity) {
             maxSimilarity = similarity;
             story.setTopicID(i);
