@@ -49,13 +49,14 @@ void KMeans(vector<Story> &corpus, int &numOfTopics) {
     int loopCnt = 10;	// Kmeans loop execution counter, set to 10 temporarily
 
     while (loopCnt) {
+    	// label clusters
+        for (unsigned int i = 0; i < corpus.size(); i++) {
+            cluster(corpus[i], means);
+        }
+
     	// Calculate centers
         for (int i = 0; i < numOfTopics; i++) {
             means[i] = getMean(corpus, i);
-        }
-        
-        for (unsigned int i = 0; i < corpus.size(); i++) {
-            cluster(corpus[i], means);
         }
         
         loopCnt--;
@@ -67,7 +68,7 @@ void initMeans(vector<Story> &means, const vector<Story> &corpus, const int &num
     for (int i = 0; i < numOfTopics; i++) {
 //      map<int, double> tfidf;
 //      corpus[i].(tfidf);
-        means[i] = corpus[i];
+        means[i] = corpus[i];	// set initial centers to several stories, for temporary.
     }
 }
 
@@ -76,6 +77,7 @@ Story getMean(const vector<Story> &corpus, const int &topicID) {
     Story mean;
     int storyNumOfTopic = 0;
     
+    // Add all TF-IDF value to mean
     for (unsigned int i = 0; i < corpus.size(); i++) {
         if (corpus[i].getTopicID() == topicID) {
             storyNumOfTopic++;
