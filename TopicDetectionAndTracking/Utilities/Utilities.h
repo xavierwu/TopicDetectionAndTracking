@@ -21,6 +21,7 @@ strtok_s won't work in other platform, e.g., linux. */
 #include <sstream>
 #include <cmath>
 #include <cstring>
+#include <io.h>
 
 // please avoid using namespaces
 using std::string;
