@@ -1,55 +1,175 @@
 #include "DataPreprocessing.h"
 
 /* Set 'corpus' and 'glossary', and do some other preprocessing */
-void DataPreprocessing (vector<Story> &corpus,
-						map<int, string> &glossaryIntToString, map<string, int> &glossaryStringToInt,
-						const string &tkn_file, const string &bnd_file, const bool &isWithStemmer)
+void DataPreprocessing(vector<Story> &corpus,
+	map<int, string> &glossaryIntToString, map<string, int> &glossaryStringToInt,
+	const string tknDir, const string bndDir, const bool &isWithStemmer)
 {
 	cout << "> Start DataPreprocessing......" << endl;
 
-	readCorpus (corpus, glossaryIntToString, glossaryStringToInt, tkn_file, bnd_file, isWithStemmer);
+	readCorpus(corpus, glossaryIntToString, glossaryStringToInt, tknDir, bndDir, isWithStemmer);
 
 	/* Calculate the tfidf, and save it. */
 	//	Story::setTFIDFOfCorpus (corpus);
 	//	Story::saveTFIDF (corpus, "Dataset/tfidf.dat");
 
 	/* Load the tfidf from file, pls make sure the file exist.  */
-	Story::loadTFIDF (corpus, "Dataset/tfidf.dat");
+	Story::loadTFIDF(corpus, "Dataset/tfidf.dat");
 
 	cout << "> DataPreprocessing Done." << endl;
 }
 
-void readCorpus (vector<Story> &corpus,
-				 map<int, string> &glossaryIntToString, map<string, int> &glossaryStringToInt,
-				 const string &tkn_file, const string &bnd_file, const bool &isWithStemmer)
+void readCorpus(vector<Story> &corpus,
+	map<int, string> &glossaryIntToString, map<string, int> &glossaryStringToInt,
+	const string tknDir, const string bndDir, const bool &isWithStemmer)
 {
 	cout << ">> Start reading corpus......" << endl;
 
 	if (!isWithStemmer) {
-		// the id of the first and the last words of a story
-		vector<int> Brecid;
-		vector<int> Erecid;
+		cout << "Please choose" << endl;
+		cout << "1. Read from the specific file" << endl;
+		cout << "2. Read from files in the directory" << endl;
 
-		readBndFile (corpus, bnd_file, Brecid, Erecid);
+		char choice;
+		cin >> choice;
 
-		readTknFile (corpus, tkn_file, Brecid, Erecid, glossaryIntToString, glossaryStringToInt);
-	} else { // TODO: (optional) add a stemmer to the readCorpus(...) ?
+		while (true){
+			fflush(stdin);
+			if (choice == '1'){
+				readCorpusFromFile(corpus, glossaryIntToString, glossaryStringToInt, tknDir, bndDir, isWithStemmer);
+				break;
+			}
+			else if (choice == '2'){
+				readCorpusFromDirectory(corpus, glossaryIntToString, glossaryStringToInt, tknDir, bndDir, isWithStemmer);
+				break;
+			}
+			else{
+				cout << "Invalid input, please input again!" << endl;
+				cin >> choice;
+			}
+		}
+
+	}
+	else { // TODO: (optional) add a stemmer to the readCorpus(...) ?
 	}
 
 	cout << ">> Reading corpus done." << endl;
 }
 
-void readBndFile (vector<Story> &corpus, const string &bnd_file, vector<int> &Brecid,
-				  vector<int> &Erecid)
+void readCorpusFromFile(vector<Story> &corpus,
+	map<int, string> &glossaryIntToString, map<string, int> &glossaryStringToInt,
+	const string tknDir, const string bndDir, const bool &isWithStemmer){
+
+	while (true){
+		// the id of the first and the last words of a story
+		vector<int> Brecid;
+		vector<int> Erecid;
+
+		string bndFile, tknFile;
+
+		cout << "Please input the file name of bnd file" << endl;
+		cin >> bndFile;
+		bndFile = bndDir + bndFile;
+
+		cout << "Please input the file name of tkn file" << endl;
+		cin >> tknFile;
+		tknFile = tknDir + tknFile;
+
+		readBndFile(corpus, bndFile, Brecid, Erecid);
+
+		readTknFile(corpus, tknFile, Brecid, Erecid, glossaryIntToString, glossaryStringToInt);
+
+		cout << "Continue?(Y/N)" << endl;
+
+		char choice;
+		cin >> choice;
+
+
+		REJUDGE:	fflush(stdin);
+		if (choice == 'Y' || choice == 'y'){
+			continue;
+		}
+		else if (choice == 'N' || choice == 'n'){
+			break;
+		}
+		else{
+			cout << "Invalid input, please input again!" << endl;
+			cin >> choice;
+			goto REJUDGE;
+		}
+
+	}
+}
+
+void readCorpusFromDirectory(vector<Story> &corpus,
+	map<int, string> &glossaryIntToString, map<string, int> &glossaryStringToInt,
+	const string tknDir, const string bndDir, const bool &isWithStemmer){
+	_finddata_t file;
+	long lf;
+
+	// the id of the first and the last words of a story
+	vector<int> Brecid;
+	vector<int> Erecid;
+
+	string bnd = bndDir.c_str();
+	bnd += "*.*";
+	string tkn = tknDir.c_str();
+	tkn += "*.*";
+
+	if ((lf = _findfirst(bnd.c_str(), &file)) == -1l)
+		cout << "No bnd file found!" << endl;
+	else
+	{
+		// the first file name found is "..", so drop it
+		bool firsFileIsGhost = true;
+		while (_findnext(lf, &file) == 0)
+		{
+			if (!firsFileIsGhost){
+				cout << file.name << "found" << endl;
+
+				string bndFile(file.name);
+				bndFile = bndDir + bndFile;
+
+				readBndFile(corpus, bndFile, Brecid, Erecid);
+			}
+			firsFileIsGhost = false;
+		}
+	}
+
+	if ((lf = _findfirst(tkn.c_str(), &file)) == -1l)
+		cout << "No tkn file found!" << endl;
+	else
+	{
+		bool firsFileIsGhost = true;
+		while (_findnext(lf, &file) == 0)
+		{
+			if (!firsFileIsGhost){
+				cout << file.name << "found" << endl;
+
+				string tknFile(file.name);
+				tknFile = tknDir + tknFile;
+
+				readTknFile(corpus, tknFile, Brecid, Erecid, glossaryIntToString, glossaryStringToInt);
+			}
+			firsFileIsGhost = false;
+		}
+	}
+
+	_findclose(lf);
+
+}
+
+void readBndFile(vector<Story> &corpus, const string bndFile, vector<int> &Brecid,
+	vector<int> &Erecid)
 {
 	int numOfStories = 0;
 
-	ifstream fin (bnd_file, ios::in);
-	assert (fin.is_open ());
+	ifstream fin(bndFile, ios::in);
+	assert(fin.is_open());
 
 	// the first line is title, and it is of no use, so try to work hard to be a useful man
 	string titleUseless;
-	getline (fin, titleUseless);
+	getline(fin, titleUseless);
 
 	// for each line, if simply use fin, we can get 5 strings:
 	// 1. "<BOUNDARY",  useless
@@ -62,8 +182,8 @@ void readBndFile (vector<Story> &corpus, const string &bnd_file, vector<int> &Br
 		string timestamp, doctypeUseless;
 
 		// because they are not only Brecid and Erecid, so they are called as follows
-		char BrecidWithRedundancy[15] = { };
-		char ErecidWithRedundancy[15] = { };
+		char BrecidWithRedundancy[15] = {};
+		char ErecidWithRedundancy[15] = {};
 
 		// the follows are real Brecid and Erecid
 		int BrecidInt, ErecidInt;
@@ -71,7 +191,7 @@ void readBndFile (vector<Story> &corpus, const string &bnd_file, vector<int> &Br
 		fin >> timestamp >> doctypeUseless >> BrecidWithRedundancy >> ErecidWithRedundancy;
 
 		// retrieve the timestamp
-		timestamp = timestamp.substr (9, timestamp.length () - 9);
+		timestamp = timestamp.substr(9, timestamp.length() - 9);
 
 		// use "=" to split the string
 		const char *split = "=";
@@ -79,40 +199,42 @@ void readBndFile (vector<Story> &corpus, const string &bnd_file, vector<int> &Br
 		// point to the real Brecid and Erecid
 		char *pid;
 
-		pid = strtok (BrecidWithRedundancy, split);
-		pid = strtok (NULL, split);
+		pid = strtok(BrecidWithRedundancy, split);
+		pid = strtok(NULL, split);
 
 		// convert char* to int
-		BrecidInt = atoi (pid);
+		BrecidInt = atoi(pid);
 
-		pid = strtok (ErecidWithRedundancy, split);
-		pid = strtok (NULL, split);
+		pid = strtok(ErecidWithRedundancy, split);
+		pid = strtok(NULL, split);
 
-		ErecidInt = atoi (pid);
+		ErecidInt = atoi(pid);
 
 		vector<int> words;
-		Story newStory (numOfStories, words, timestamp);
-		corpus.push_back (newStory);
+		Story newStory(numOfStories, words, timestamp);
+		corpus.push_back(newStory);
 		numOfStories++;
 
-		Brecid.push_back (BrecidInt);
-		Erecid.push_back (ErecidInt);
+		Brecid.push_back(BrecidInt);
+		Erecid.push_back(ErecidInt);
 	}
 
-	fin.close ();
+	fin.close();
+
+	cout << "read bnd file done!" << endl;
 }
 
-void readTknFile (vector<Story> &corpus, const string &tkn_file,
-				  const vector<int> &Brecid, const vector<int> &Erecid,
-				  map<int, string> &glossaryIntToString, map<string, int> &glossaryStringToInt)
+void readTknFile(vector<Story> &corpus, const string tknFile,
+	const vector<int> &Brecid, const vector<int> &Erecid,
+	map<int, string> &glossaryIntToString, map<string, int> &glossaryStringToInt)
 {
 
-	ifstream fin (tkn_file, ios::in);
-	assert (fin.is_open ());
+	ifstream fin(tknFile, ios::in);
+	assert(fin.is_open());
 
 	// the first line is title, and it is of no use, so try to work hard again to be a useful man
 	string titleUseless;
-	getline (fin, titleUseless);
+	getline(fin, titleUseless);
 
 	// for each line, if simply use fin, we can get 4 strings:
 	// 1. "<W",  useless
@@ -125,45 +247,52 @@ void readTknFile (vector<Story> &corpus, const string &tkn_file,
 	while (fin >> _WUseless) {
 		string recidWithRedundancy, TrUseless, word;
 
+		// this means a new tkn file is read
+		if (Brecid[numOfStories] == 1)
+			recid = 1;
+
 		if (recid > Erecid[numOfStories]) {
 			numOfStories++;
 		}
 
 		fin >> recidWithRedundancy >> TrUseless >> word;
 
-		processWord (word);
+		processWord(word);
 
-		addWordToGlossary (word, glossaryIntToString, glossaryStringToInt);
+		addWordToGlossary(word, glossaryIntToString, glossaryStringToInt);
 
-		corpus[numOfStories].addWord (glossaryStringToInt[word]);
+		corpus[numOfStories].addWord(glossaryStringToInt[word]);
 
 		recid++;
 	}
 
-	fin.close ();
+	fin.close();
+
+	cout << "read tkn file done!" << endl;
 }
 
-void processWord (string &word)
+void processWord(string &word)
 {
-	int len = word.length ();
+	int len = word.length();
 
 	for (int i = 0; i < len; i++) {
 		if (word[i] >= 'A' && word[i] <= 'Z') {
 			word[i] -= ('A' - 'a');
-		} else if (word[i] < 'a' || word[i] > 'z') {
+		}
+		else if (word[i] < 'a' || word[i] > 'z') {
 			// if you can't figure out, just give up
-			word = word.substr (0, i) + word.substr (i + 1, word.length () - (i + 1));
+			word = word.substr(0, i) + word.substr(i + 1, word.length() - (i + 1));
 			i--;
 			len--;
 		}
 	}
 }
 
-void addWordToGlossary (const string &word, map<int, string> &glossaryIntToString,
-						map<string, int> &glossaryStringToInt)
+void addWordToGlossary(const string &word, map<int, string> &glossaryIntToString,
+	map<string, int> &glossaryStringToInt)
 {
-	if (glossaryStringToInt.find (word) == glossaryStringToInt.end ()) {
-		int index = glossaryStringToInt.size ();
+	if (glossaryStringToInt.find(word) == glossaryStringToInt.end()) {
+		int index = glossaryStringToInt.size();
 		glossaryStringToInt[word] = index;
 		glossaryIntToString[index] = word;
 	}

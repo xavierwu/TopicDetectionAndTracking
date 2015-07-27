@@ -13,10 +13,12 @@ int main (int argc, char **argv)
 	map<string, int> glossaryStringToInt;
 	vector<Story> firstStories;
 
-	string tkn_file = "Dataset/mttkn/20030402_0530_0700_CNA_MAN.mttkn";
-	string bnd_file = "Dataset/mttkn_bnd/20030402_0530_0700_CNA_MAN.mttkn_bnd";
+// 	string tkn_file = "Dataset/mttkn/20030402_0530_0700_CNA_MAN.mttkn";
+// 	string bnd_file = "Dataset/mttkn_bnd/20030402_0530_0700_CNA_MAN.mttkn_bnd";
+	string tknDir = "Dataset/mttkn/";
+	string bndDir = "Dataset/mttkn_bnd/";
 
-	DataPreprocessing (corpus, glossaryIntToString, glossaryStringToInt, tkn_file, bnd_file);
+	DataPreprocessing (corpus, glossaryIntToString, glossaryStringToInt, tknDir, bndDir);
 	cout << "corpus.size() = " << corpus.size () << endl;
 	assert (corpus.size () > 0);
 
