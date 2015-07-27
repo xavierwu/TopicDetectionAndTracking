@@ -38,6 +38,7 @@
   <ItemGroup>
     <None Include="Dataset\mttkn\20030402_0530_0700_CNA_MAN.mttkn" />
     <None Include="Dataset\mttkn_bnd\20030402_0530_0700_CNA_MAN.mttkn_bnd" />
+    <None Include="Dataset\tfidf.dat" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{AE135031-9969-4F5E-82B0-974800352F3F}</ProjectGuid>

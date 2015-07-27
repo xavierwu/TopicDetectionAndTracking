@@ -16,14 +16,20 @@ int main (int argc, char **argv)
 	string tkn_file = "Dataset/mttkn/20030402_0530_0700_CNA_MAN.mttkn";
 	string bnd_file = "Dataset/mttkn_bnd/20030402_0530_0700_CNA_MAN.mttkn_bnd";
 
-	cout << "Start DataPreprocessing..." << endl;
 	DataPreprocessing (corpus, glossaryIntToString, glossaryStringToInt, tkn_file, bnd_file);
-	cout << "DataPreprocessing Done." << endl;
+	cout << "corpus.size() = " << corpus.size () << endl;
+	assert (corpus.size () > 0);
 
-	//int numOfTopics = 0;
-	//TopicDetection (corpus, numOfTopics);
-	//FirstStoryDetection (firstStories, corpus, numOfTopics);
-	//Presentation (firstStories, glossaryIntToString);
+	int numOfTopics = 0;
+	TopicDetection (corpus, numOfTopics);
+	cout << "numOfTopics = " << numOfTopics << endl;
+	assert (numOfTopics > 0);
+
+	FirstStoryDetection (firstStories, corpus, numOfTopics);
+	cout << "firstStories.size() = " << firstStories.size () << endl;
+	assert (firstStories.size () == numOfTopics);
+
+	Presentation (firstStories, corpus, glossaryIntToString, numOfTopics);
 
 	return 0;
 }

@@ -1,7 +1,11 @@
 #include "Story.h"
 
-Story::Story (int storyID, const vector<int> words, const string &timeStamp, int topicID)
-	: storyID (storyID), words (words), timeStamp (timeStamp), topicID (topicID)
+Story::Story ()
+{
+}
+
+Story::Story (int storyID, vector<int> words, string timeStamp)
+	: storyID (storyID), words (words), timeStamp (timeStamp)
 {
 }
 
@@ -106,8 +110,14 @@ void Story::getTFIDF (map<int, double> &tfidf) const
 	tfidf = this->tfidf;
 }
 
-/* Set 'tfidf' */
-void Story::setTFIDF (const vector<Story> &corpus)
+void Story::setTFIDF (const map<int, double> &tfidf)
+{
+	this->tfidf.clear ();
+	this->tfidf = tfidf;
+}
+
+/* Set 'tfidf', based on corpus */
+void Story::setTFIDFBasedOnCorpus (const vector<Story> &corpus)
 {
 	if (this->termFrequency.empty ())
 		this->setTermFrequency ();
@@ -125,9 +135,24 @@ void Story::setTFIDF (const vector<Story> &corpus)
 	}
 }
 
+void Story::addWord (int wordIndex)
+{
+	words.push_back (wordIndex);
+}
+
 int Story::getLength () const
 {
 	return this->words.size ();
+}
+
+string Story::toString (const map<int, string> &glossary) const
+{
+	string result = "";
+	result += this->timeStamp;
+	for (const int wordID : this->words)
+		if (glossary.find (wordID) != glossary.cend ())
+			result += " " + glossary.find (wordID)->second;
+	return result;
 }
 
 bool Story::isWordExisted (int wordID) const
@@ -141,17 +166,73 @@ bool Story::isWordExisted (int wordID) const
 	}
 }
 
-string Story::toString (const map<int, string> &glossary) const
+bool Story::isClustered () const
 {
-	string result = "";
-	result += this->timeStamp;
-	for (const int wordID : this->words)
-		if (glossary.find (wordID) != glossary.cend ())
-			result += " " + glossary.find (wordID)->second;
-	return result;
+	return topicID != DEFAULT_TOPIC_ID;
 }
 
-void Story::addWord (int wordIndex)
+void Story::setTFIDFOfCorpus (vector<Story> &corpus)
 {
-	words.push_back (wordIndex);
+	cout << ">> Start calculating tfidf of corpus......" << endl;
+
+	for (unsigned count = 0; count < corpus.size (); ++count) {
+		if (count % 10 == 0)
+			cout << count << " / " << corpus.size () << endl;
+		corpus[count].setTFIDFBasedOnCorpus (corpus);
+	}
+
+	cout << ">> Calculating tfidf's done." << endl;
+}
+
+/* Save the tfidf's of corpus to tfidfFile */
+void Story::saveTFIDF (const vector<Story> &corpus, const string &tfidfFile)
+{
+	cout << ">> Start saving tfidf......" << endl;
+
+	ofstream fout (tfidfFile, ios::out);
+	assert (fout.is_open ());
+
+	for (const Story &story : corpus) {
+		map<int, double> tfidf;
+		story.getTFIDF (tfidf);
+		for (map<int, double>::const_iterator citer = tfidf.cbegin ();
+			 citer != tfidf.cend (); ++citer)
+			 fout << citer->first << ":" << citer->second << " ";
+		fout << endl;
+	}
+
+	fout.close ();
+
+	cout << ">> Saving tfidf done. " << endl;
+}
+
+/* Load the tfidf's of corpus from tfidfFile */
+void Story::loadTFIDF (vector<Story> &corpus, const string &tfidfFile)
+{
+	cout << ">> Start loading tfidf......" << endl;
+
+	ifstream fin (tfidfFile, ios::in);
+	assert (fin.is_open ());
+
+	string line = "";
+	map<int, double> tfidf;
+	stringstream ss;
+	int key;
+	double value;
+	int i = 0;
+	while (std::getline (fin, line)) {
+		tfidf.clear ();
+		ss.clear ();
+		ss << line;
+		while (ss >> key) {
+			ss.get ();
+			ss >> value;
+			tfidf[key] = value;
+		}
+		corpus[i++].setTFIDF (tfidf);
+	}
+
+	fin.close ();
+
+	cout << ">> Loading tfidf done. " << endl;
 }
