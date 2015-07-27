@@ -16,7 +16,7 @@ int main (int argc, char **argv)
 	/* <plain word, wordID> */
 	map<string, int> glossaryStringToInt;
 	/* <wordID, vector of stories' indices in corpus> */
-	map<int, vector<int>> storiesIndexWithCertainWord;
+	map<int, set<int>> storiesIndexWithCertainWord;
 
 	// 	string tkn_file = "Dataset/mttkn/20030402_0530_0700_CNA_MAN.mttkn";
 	// 	string bnd_file = "Dataset/mttkn_bnd/20030402_0530_0700_CNA_MAN.mttkn_bnd";
@@ -40,7 +40,7 @@ int main (int argc, char **argv)
 
 	int numOfTopics = 0;
 	TopicDetection (corpus, numOfTopics);
-
+	
 	cout << "numOfTopics = " << numOfTopics << endl;
 	assert (numOfTopics > 0);
 

@@ -8,10 +8,10 @@
 /* Preparing for the similarity calculation, e.g., calculating tfidf's.
 Input: 'corpus', storiesIndexWithCertainWord
 */
-void StoryLinkDetection (vector<Story> &corpus, const map<int, vector<int>> &storiesIndexWithCertainWord);
+void StoryLinkDetection (vector<Story> &corpus, const map<int, set<int>> &storiesIndexWithCertainWord);
 
 /* Calculating tfidf's of stories in corpus */
-void prepareTFIDF (vector<Story> &corpus, const map<int, vector<int>> &storiesIndexWithCertainWord);
+void prepareTFIDF (vector<Story> &corpus, const map<int, set<int>> &storiesIndexWithCertainWord);
 
 /* Given two stories, return whether or not these two stories discuss the same topic.
 ACQUIRED: invoke StoryLinkDetection() before this function. 

@@ -1,7 +1,7 @@
 #include "StoryLinkDetection.h"
 
 /* Preparing for the similarity calculation, e.g., calculating tfidf's. */
-void StoryLinkDetection (vector<Story> &corpus, const map<int, vector<int>> &storiesIndexWithCertainWord)
+void StoryLinkDetection (vector<Story> &corpus, const map<int, set<int>> &storiesIndexWithCertainWord)
 {
 	cout << "> Start StoryLinkDetection......" << endl;
 
@@ -10,7 +10,7 @@ void StoryLinkDetection (vector<Story> &corpus, const map<int, vector<int>> &sto
 	cout << "> StoryLinkDetection done. " << endl;
 }
 
-void prepareTFIDF (vector<Story> &corpus, const map<int, vector<int>> &storiesIndexWithCertainWord)
+void prepareTFIDF (vector<Story> &corpus, const map<int, set<int>> &storiesIndexWithCertainWord)
 {
 	cout << ">> Start prepareTFIDF......" << endl;
 

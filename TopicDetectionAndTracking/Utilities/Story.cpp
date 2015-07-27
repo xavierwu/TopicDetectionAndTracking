@@ -118,7 +118,7 @@ void Story::setTFIDF (const map<int, double> &tfidf)
 
 /* Set 'tfidf', based on corpus */
 void Story::setTFIDFBasedOnCorpus (const vector<Story> &corpus,
-								   const map<int, vector<int>> &storiesIndexWithCertainWord)
+								   const map<int, set<int>> &storiesIndexWithCertainWord)
 {
 	if (this->termFrequency.empty ())
 		this->setTermFrequency ();
@@ -173,7 +173,7 @@ bool Story::isClustered () const
 }
 
 void Story::setTFIDFOfCorpus (vector<Story> &corpus,
-							  const map<int, vector<int>> &storiesIndexWithCertainWord)
+							  const map<int, set<int>> &storiesIndexWithCertainWord)
 {
 	cout << ">>> Start calculating tfidf of corpus......" << endl;
 

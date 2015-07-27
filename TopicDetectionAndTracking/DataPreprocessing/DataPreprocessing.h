@@ -11,7 +11,7 @@ Output: 'corpus', 'glossaryIntToString', 'glossaryStringToInt'
 */
 void DataPreprocessing (vector<Story> &corpus,
 						map<int, string> &glossaryIntToString, map<string, int> &glossaryStringToInt,
-						map<int, vector<int>> &storiesIndexWithCertainWord,
+						map<int, set<int>> &storiesIndexWithCertainWord,
 						const string tknDir, const string bndDir,
 						const bool &isWithStemmer = false);
 
@@ -21,7 +21,7 @@ Output: 'corpus', 'glossaryIntToString', 'glossaryStringToInt'
 */
 void readCorpus (vector<Story> &corpus,
 				 map<int, string> &glossaryIntToString, map<string, int> &glossaryStringToInt,
-				 map<int, vector<int>> &storiesIndexWithCertainWord,
+				 map<int, set<int>> &storiesIndexWithCertainWord,
 				 const string tknDir, const string bndDir, const bool &isWithStemmer = false);
 
 /* Read from the specific file, set the 'corpus' and 'glossary'.
@@ -30,7 +30,7 @@ Output: 'corpus', 'glossaryIntToString', 'glossaryStringToInt'
 */
 void readCorpusFromFile (vector<Story> &corpus,
 						 map<int, string> &glossaryIntToString, map<string, int> &glossaryStringToInt,
-						 map<int, vector<int>> &storiesIndexWithCertainWord,
+						 map<int, set<int>> &storiesIndexWithCertainWord,
 						 const string tknDir, const string bndDir, const bool &isWithStemmer = false);
 
 /* Read from files in the directory, set the 'corpus' and 'glossary'.
@@ -39,7 +39,7 @@ Output: 'corpus', 'glossaryIntToString', 'glossaryStringToInt'
 */
 void readCorpusFromDirectory (vector<Story> &corpus, map<int, string> &glossaryIntToString,
 							  map<string, int> &glossaryStringToInt,
-							  map<int, vector<int>> &storiesIndexWithCertainWord,
+							  map<int, set<int>> &storiesIndexWithCertainWord,
 							  const string tknDir, const string bndDir,
 							  const bool &isWithStemmer = false);
 
@@ -56,7 +56,7 @@ Output: 'corpus', 'glossaryIntToString', 'glossaryStringToInt' */
 void readTknFile (vector<Story> &corpus, const string tknFile,
 				  const vector<int> &Brecid, const vector<int> &Erecid,
 				  map<int, string> &glossaryIntToString, map<string, int> &glossaryStringToInt,
-				  map<int, vector<int>> &storiesIndexWithCertainWord);
+				  map<int, set<int>> &storiesIndexWithCertainWord);
 
 /* Process the word, remove punctuations and convert all the letters to lowercase
 Input: 'word'

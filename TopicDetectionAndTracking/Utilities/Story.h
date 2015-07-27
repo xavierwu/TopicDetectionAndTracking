@@ -78,7 +78,7 @@ public:
 	void setTFIDF (const map<int, double> &tfidf);
 	/* To calculate tfidf for a certain story, we have to refer to a corpus. */
 	void setTFIDFBasedOnCorpus (const vector<Story> &corpus, 
-								const map<int, vector<int>> &storiesIndexWithCertainWord);
+								const map<int, set<int>> &storiesIndexWithCertainWord);
 
 	/* add word to 'words' */
 	void addWord (int wordIndex);
@@ -97,7 +97,7 @@ public:
 
 	/* Set 'tfidf' for all stories in corpus. */
 	static void setTFIDFOfCorpus (vector<Story> &corpus, 
-								  const map<int, vector<int>> &storiesIndexWithCertainWord);
+								  const map<int, set<int>> &storiesIndexWithCertainWord);
 	/* Save the tfidf's of corpus to tfidfFile */
 	static void saveTFIDF (const vector<Story> &corpus, const string &tfidfFile);
 	/* Load the tfidf's of corpus from tfidfFile */
