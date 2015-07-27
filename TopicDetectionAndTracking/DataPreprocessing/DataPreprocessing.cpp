@@ -1,5 +1,7 @@
 #include "DataPreprocessing.h"
 
+const int MAX_FILES = 999999;
+
 /* Set 'corpus' and 'glossary', and do some other preprocessing */
 void DataPreprocessing(vector<Story> &corpus,
 	map<int, string> &glossaryIntToString, map<string, int> &glossaryStringToInt,
@@ -116,40 +118,53 @@ void readCorpusFromDirectory(vector<Story> &corpus,
 	string tkn = tknDir.c_str();
 	tkn += "*.*";
 
+	int numOfFileTobeRead = 0;
+	int numOfFilesRead = 0;
+
+	cout << "Input the number of files want to be read (0 represents all)" << endl;
+	cin >> numOfFileTobeRead;
+
+	if (numOfFileTobeRead == 0){
+		numOfFileTobeRead = MAX_FILES;
+	}
+
 	if ((lf = _findfirst(bnd.c_str(), &file)) == -1l)
 		cout << "No bnd file found!" << endl;
 	else
 	{
 		// the first file name found is "..", so drop it
 		bool firsFileIsGhost = true;
-		while (_findnext(lf, &file) == 0)
+		while (_findnext(lf, &file) == 0 && numOfFilesRead < numOfFileTobeRead)
 		{
 			if (!firsFileIsGhost){
-				cout << file.name << "found" << endl;
+				cout << file.name << "	found" << endl;
 
 				string bndFile(file.name);
 				bndFile = bndDir + bndFile;
 
 				readBndFile(corpus, bndFile, Brecid, Erecid);
+				numOfFilesRead++;
 			}
 			firsFileIsGhost = false;
 		}
 	}
 
+	numOfFilesRead = 0;
 	if ((lf = _findfirst(tkn.c_str(), &file)) == -1l)
 		cout << "No tkn file found!" << endl;
 	else
 	{
 		bool firsFileIsGhost = true;
-		while (_findnext(lf, &file) == 0)
+		while (_findnext(lf, &file) == 0 && numOfFilesRead < numOfFileTobeRead)
 		{
 			if (!firsFileIsGhost){
-				cout << file.name << "found" << endl;
+				cout << file.name << "	found" << endl;
 
 				string tknFile(file.name);
 				tknFile = tknDir + tknFile;
 
 				readTknFile(corpus, tknFile, Brecid, Erecid, glossaryIntToString, glossaryStringToInt);
+				numOfFilesRead++;
 			}
 			firsFileIsGhost = false;
 		}
@@ -278,6 +293,12 @@ void processWord(string &word)
 	for (int i = 0; i < len; i++) {
 		if (word[i] >= 'A' && word[i] <= 'Z') {
 			word[i] -= ('A' - 'a');
+		}
+		else if(word[i] >= '0' && word[i] <= '9'){
+			continue;
+		}
+		else if (word[i] == '.' || word[i] == '-'){
+			continue;
 		}
 		else if (word[i] < 'a' || word[i] > 'z') {
 			// if you can't figure out, just give up
