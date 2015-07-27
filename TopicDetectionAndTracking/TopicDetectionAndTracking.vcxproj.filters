@@ -37,6 +37,9 @@
     <Filter Include="Dataset\mttkn_bnd">
       <UniqueIdentifier>{d9b592ef-d0f1-4adf-a197-42af1df82f2c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Websites">
+      <UniqueIdentifier>{fd7347fb-b2ac-4929-9348-674e70bc3f41}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DataPreprocessing\DataPreprocessing.cpp">
@@ -226,6 +229,12 @@
     </None>
     <None Include="Dataset\mttkn_bnd\20030402_0830_1000_CNA_MAN.mttkn_bnd">
       <Filter>Dataset\mttkn_bnd</Filter>
+    </None>
+    <None Include="Websites\part2.html">
+      <Filter>Websites</Filter>
+    </None>
+    <None Include="Websites\part1.html">
+      <Filter>Websites</Filter>
     </None>
   </ItemGroup>
 </Project>
