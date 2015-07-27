@@ -36,8 +36,46 @@
     <ClInclude Include="Utilities\Utilities.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Dataset\mttkn\20030401_0113_1041_AFP_ARB.mttkn" />
+    <None Include="Dataset\mttkn\20030401_0130_0330_XIN_MAN.mttkn" />
+    <None Include="Dataset\mttkn\20030401_0300_0500_AFP_MAN.mttkn" />
+    <None Include="Dataset\mttkn\20030401_0530_0700_CNA_MAN.mttkn" />
+    <None Include="Dataset\mttkn\20030401_0600_0800_XIN_ARB.mttkn" />
+    <None Include="Dataset\mttkn\20030401_0730_0930_XIN_MAN.mttkn" />
+    <None Include="Dataset\mttkn\20030401_1000_1200_ZBN_MAN.mttkn" />
+    <None Include="Dataset\mttkn\20030401_1041_2343_AFP_ARB.mttkn" />
+    <None Include="Dataset\mttkn\20030401_1100_1230_ANN_ARB.mttkn" />
+    <None Include="Dataset\mttkn\20030401_1130_1330_XIN_MAN.mttkn" />
+    <None Include="Dataset\mttkn\20030401_1500_1700_XIN_ARB.mttkn" />
+    <None Include="Dataset\mttkn\20030401_1530_1730_XIN_MAN.mttkn" />
+    <None Include="Dataset\mttkn\20030401_1930_2130_XIN_MAN.mttkn" />
+    <None Include="Dataset\mttkn\20030402_0106_1145_AFP_ARB.mttkn" />
+    <None Include="Dataset\mttkn\20030402_0130_0330_XIN_MAN.mttkn" />
+    <None Include="Dataset\mttkn\20030402_0300_0500_AFP_MAN.mttkn" />
     <None Include="Dataset\mttkn\20030402_0530_0700_CNA_MAN.mttkn" />
+    <None Include="Dataset\mttkn\20030402_0600_0800_XIN_ARB.mttkn" />
+    <None Include="Dataset\mttkn\20030402_0730_0930_XIN_MAN.mttkn" />
+    <None Include="Dataset\mttkn\20030402_0830_1000_CNA_MAN.mttkn" />
+    <None Include="Dataset\mttkn_bnd\20030401_0113_1041_AFP_ARB.mttkn_bnd" />
+    <None Include="Dataset\mttkn_bnd\20030401_0130_0330_XIN_MAN.mttkn_bnd" />
+    <None Include="Dataset\mttkn_bnd\20030401_0300_0500_AFP_MAN.mttkn_bnd" />
+    <None Include="Dataset\mttkn_bnd\20030401_0530_0700_CNA_MAN.mttkn_bnd" />
+    <None Include="Dataset\mttkn_bnd\20030401_0600_0800_XIN_ARB.mttkn_bnd" />
+    <None Include="Dataset\mttkn_bnd\20030401_0730_0930_XIN_MAN.mttkn_bnd" />
+    <None Include="Dataset\mttkn_bnd\20030401_1000_1200_ZBN_MAN.mttkn_bnd" />
+    <None Include="Dataset\mttkn_bnd\20030401_1041_2343_AFP_ARB.mttkn_bnd" />
+    <None Include="Dataset\mttkn_bnd\20030401_1100_1230_ANN_ARB.mttkn_bnd" />
+    <None Include="Dataset\mttkn_bnd\20030401_1130_1330_XIN_MAN.mttkn_bnd" />
+    <None Include="Dataset\mttkn_bnd\20030401_1500_1700_XIN_ARB.mttkn_bnd" />
+    <None Include="Dataset\mttkn_bnd\20030401_1530_1730_XIN_MAN.mttkn_bnd" />
+    <None Include="Dataset\mttkn_bnd\20030401_1930_2130_XIN_MAN.mttkn_bnd" />
+    <None Include="Dataset\mttkn_bnd\20030402_0106_1145_AFP_ARB.mttkn_bnd" />
+    <None Include="Dataset\mttkn_bnd\20030402_0130_0330_XIN_MAN.mttkn_bnd" />
+    <None Include="Dataset\mttkn_bnd\20030402_0300_0500_AFP_MAN.mttkn_bnd" />
     <None Include="Dataset\mttkn_bnd\20030402_0530_0700_CNA_MAN.mttkn_bnd" />
+    <None Include="Dataset\mttkn_bnd\20030402_0600_0800_XIN_ARB.mttkn_bnd" />
+    <None Include="Dataset\mttkn_bnd\20030402_0730_0930_XIN_MAN.mttkn_bnd" />
+    <None Include="Dataset\mttkn_bnd\20030402_0830_1000_CNA_MAN.mttkn_bnd" />
     <None Include="Dataset\tfidf.dat" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
