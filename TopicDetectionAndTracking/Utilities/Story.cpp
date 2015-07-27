@@ -117,7 +117,8 @@ void Story::setTFIDF (const map<int, double> &tfidf)
 }
 
 /* Set 'tfidf', based on corpus */
-void Story::setTFIDFBasedOnCorpus (const vector<Story> &corpus)
+void Story::setTFIDFBasedOnCorpus (const vector<Story> &corpus,
+								   const map<int, set<int>> &storiesIndexWithCertainWord)
 {
 	if (this->termFrequency.empty ())
 		this->setTermFrequency ();
@@ -125,13 +126,13 @@ void Story::setTFIDFBasedOnCorpus (const vector<Story> &corpus)
 	this->tfidf = this->termFrequency;
 	for (map<int, double>::iterator iter = this->tfidf.begin ();
 		 iter != this->tfidf.end (); ++iter) {
-		double idf = 0.0;
-		double storiesWithWord = 0;
-		for (const Story curStory : corpus)
-			if (curStory.isWordExisted (iter->first))
-				storiesWithWord++;
-		idf = log (corpus.size () / storiesWithWord);
-		iter->second *= idf;
+		if (storiesIndexWithCertainWord.find (iter->first) != storiesIndexWithCertainWord.cend ()) {
+			double idf = 0.0;
+			double storiesWithWord = 0.0;
+			storiesWithWord = storiesIndexWithCertainWord.find (iter->first)->second.size ();
+			idf = log (corpus.size () / storiesWithWord);
+			iter->second *= idf;
+		}
 	}
 }
 
@@ -171,23 +172,24 @@ bool Story::isClustered () const
 	return topicID != DEFAULT_TOPIC_ID;
 }
 
-void Story::setTFIDFOfCorpus (vector<Story> &corpus)
+void Story::setTFIDFOfCorpus (vector<Story> &corpus,
+							  const map<int, set<int>> &storiesIndexWithCertainWord)
 {
-	cout << ">> Start calculating tfidf of corpus......" << endl;
+	cout << ">>> Start calculating tfidf of corpus......" << endl;
 
 	for (unsigned count = 0; count < corpus.size (); ++count) {
 		if (count % 10 == 0)
 			cout << count << " / " << corpus.size () << endl;
-		corpus[count].setTFIDFBasedOnCorpus (corpus);
+		corpus[count].setTFIDFBasedOnCorpus (corpus, storiesIndexWithCertainWord);
 	}
 
-	cout << ">> Calculating tfidf's done." << endl;
+	cout << ">>> Calculating tfidf's done." << endl;
 }
 
 /* Save the tfidf's of corpus to tfidfFile */
 void Story::saveTFIDF (const vector<Story> &corpus, const string &tfidfFile)
 {
-	cout << ">> Start saving tfidf......" << endl;
+	cout << ">>> Start saving tfidf......" << endl;
 
 	ofstream fout (tfidfFile, ios::out);
 	assert (fout.is_open ());
@@ -203,13 +205,13 @@ void Story::saveTFIDF (const vector<Story> &corpus, const string &tfidfFile)
 
 	fout.close ();
 
-	cout << ">> Saving tfidf done. " << endl;
+	cout << ">>> Saving tfidf done. " << endl;
 }
 
 /* Load the tfidf's of corpus from tfidfFile */
 void Story::loadTFIDF (vector<Story> &corpus, const string &tfidfFile)
 {
-	cout << ">> Start loading tfidf......" << endl;
+	cout << ">>> Start loading tfidf......" << endl;
 
 	ifstream fin (tfidfFile, ios::in);
 	assert (fin.is_open ());
@@ -234,5 +236,5 @@ void Story::loadTFIDF (vector<Story> &corpus, const string &tfidfFile)
 
 	fin.close ();
 
-	cout << ">> Loading tfidf done. " << endl;
+	cout << ">>> Loading tfidf done. " << endl;
 }
