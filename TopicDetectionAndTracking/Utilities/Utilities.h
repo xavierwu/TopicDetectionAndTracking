@@ -22,6 +22,7 @@ strtok_s won't work in other platform, e.g., linux. */
 #include <cmath>
 #include <cstring>
 #include <io.h>
+#include <set>
 
 // please avoid using namespaces
 using std::string;
@@ -34,5 +35,6 @@ using std::ifstream;
 using std::ofstream;
 using std::ios;
 using std::stringstream;
+using std::set;
 
 #endif

@@ -11,6 +11,7 @@ Output: 'corpus', 'glossaryIntToString', 'glossaryStringToInt'
 */
 void DataPreprocessing (vector<Story> &corpus,
 						map<int, string> &glossaryIntToString, map<string, int> &glossaryStringToInt,
+						map<int, vector<int>> &storiesIndexWithCertainWord,
 						const string tknDir, const string bndDir,
 						const bool &isWithStemmer = false);
 
@@ -20,37 +21,42 @@ Output: 'corpus', 'glossaryIntToString', 'glossaryStringToInt'
 */
 void readCorpus (vector<Story> &corpus,
 				 map<int, string> &glossaryIntToString, map<string, int> &glossaryStringToInt,
+				 map<int, vector<int>> &storiesIndexWithCertainWord,
 				 const string tknDir, const string bndDir, const bool &isWithStemmer = false);
 
 /* Read from the specific file, set the 'corpus' and 'glossary'.
 Input: 'tknDir', 'bndDir', 'isWithStemmer'
 Output: 'corpus', 'glossaryIntToString', 'glossaryStringToInt'
 */
-void readCorpusFromFile(vector<Story> &corpus,
-						map<int, string> &glossaryIntToString, map<string, int> &glossaryStringToInt,
-						const string tknDir, const string bndDir, const bool &isWithStemmer = false);
+void readCorpusFromFile (vector<Story> &corpus,
+						 map<int, string> &glossaryIntToString, map<string, int> &glossaryStringToInt,
+						 map<int, vector<int>> &storiesIndexWithCertainWord,
+						 const string tknDir, const string bndDir, const bool &isWithStemmer = false);
 
 /* Read from files in the directory, set the 'corpus' and 'glossary'.
 Input: 'tknDir', 'bndDir', 'isWithStemmer'
 Output: 'corpus', 'glossaryIntToString', 'glossaryStringToInt'
 */
-void readCorpusFromDirectory(vector<Story> &corpus,
-	map<int, string> &glossaryIntToString, map<string, int> &glossaryStringToInt,
-	const string tknDir, const string bndDir, const bool &isWithStemmer = false);
+void readCorpusFromDirectory (vector<Story> &corpus, map<int, string> &glossaryIntToString,
+							  map<string, int> &glossaryStringToInt,
+							  map<int, vector<int>> &storiesIndexWithCertainWord,
+							  const string tknDir, const string bndDir,
+							  const bool &isWithStemmer = false);
 
 
 /* Read from bnd files to get the begin and the end of a story.
 Input: 'bnd_file'
 Output: 'corpus', 'Brecid', 'Erecid' */
-void readBndFile (vector<Story> &corpus, const string bnd_file,
+void readBndFile (vector<Story> &corpus, const string bndFile,
 				  vector<int> &Brecid, vector<int> &Erecid);
 
 /* Read from bnd files, get the words for each story and set the glossary.
 Input: 'tkn_file', 'Brecid', 'Erecid'
 Output: 'corpus', 'glossaryIntToString', 'glossaryStringToInt' */
-void readTknFile (vector<Story> &corpus, const string tkn_file,
+void readTknFile (vector<Story> &corpus, const string tknFile,
 				  const vector<int> &Brecid, const vector<int> &Erecid,
-				  map<int, string> &glossaryIntToString, map<string, int> &glossaryStringToInt);
+				  map<int, string> &glossaryIntToString, map<string, int> &glossaryStringToInt,
+				  map<int, vector<int>> &storiesIndexWithCertainWord);
 
 /* Process the word, remove punctuations and convert all the letters to lowercase
 Input: 'word'

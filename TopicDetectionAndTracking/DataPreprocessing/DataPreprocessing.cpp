@@ -5,24 +5,21 @@ const int MAX_FILES = 999999;
 /* Set 'corpus' and 'glossary', and do some other preprocessing */
 void DataPreprocessing (vector<Story> &corpus,
 						map<int, string> &glossaryIntToString, map<string, int> &glossaryStringToInt,
-						const string tknDir, const string bndDir, const bool &isWithStemmer)
+						map<int, vector<int>> &storiesIndexWithCertainWord,
+						const string tknDir, const string bndDir,
+						const bool &isWithStemmer)
 {
 	cout << "> Start DataPreprocessing......" << endl;
 
-	readCorpus (corpus, glossaryIntToString, glossaryStringToInt, tknDir, bndDir, isWithStemmer);
-
-	/* Calculate the tfidf, and save it. */
-	Story::setTFIDFOfCorpus (corpus);
-	Story::saveTFIDF (corpus, "Dataset/tfidf.dat");
-
-	/* Load the tfidf from file, pls make sure the file exist.  */
-	// Story::loadTFIDF(corpus, "Dataset/tfidf.dat");
+	readCorpus (corpus, glossaryIntToString, glossaryStringToInt, storiesIndexWithCertainWord, tknDir,
+				bndDir, isWithStemmer);
 
 	cout << "> DataPreprocessing Done." << endl;
 }
 
 void readCorpus (vector<Story> &corpus,
 				 map<int, string> &glossaryIntToString, map<string, int> &glossaryStringToInt,
+				 map<int, vector<int>> &storiesIndexWithCertainWord,
 				 const string tknDir, const string bndDir, const bool &isWithStemmer)
 {
 	cout << ">> Start reading corpus......" << endl;
@@ -38,10 +35,12 @@ void readCorpus (vector<Story> &corpus,
 		while (true) {
 			fflush (stdin);
 			if (choice == '1') {
-				readCorpusFromFile (corpus, glossaryIntToString, glossaryStringToInt, tknDir, bndDir, isWithStemmer);
+				readCorpusFromFile (corpus, glossaryIntToString, glossaryStringToInt,
+									storiesIndexWithCertainWord, tknDir, bndDir, isWithStemmer);
 				break;
 			} else if (choice == '2') {
-				readCorpusFromDirectory (corpus, glossaryIntToString, glossaryStringToInt, tknDir, bndDir, isWithStemmer);
+				readCorpusFromDirectory (corpus, glossaryIntToString, glossaryStringToInt,
+										 storiesIndexWithCertainWord, tknDir, bndDir, isWithStemmer);
 				break;
 			} else {
 				cout << "Invalid input, please input again!" << endl;
@@ -57,6 +56,7 @@ void readCorpus (vector<Story> &corpus,
 
 void readCorpusFromFile (vector<Story> &corpus,
 						 map<int, string> &glossaryIntToString, map<string, int> &glossaryStringToInt,
+						 map<int, vector<int>> &storiesIndexWithCertainWord,
 						 const string tknDir, const string bndDir, const bool &isWithStemmer)
 {
 
@@ -77,7 +77,7 @@ void readCorpusFromFile (vector<Story> &corpus,
 
 		readBndFile (corpus, bndFile, Brecid, Erecid);
 
-		readTknFile (corpus, tknFile, Brecid, Erecid, glossaryIntToString, glossaryStringToInt);
+		readTknFile (corpus, tknFile, Brecid, Erecid, glossaryIntToString, glossaryStringToInt, storiesIndexWithCertainWord);
 
 		cout << "Continue?(Y/N)" << endl;
 
@@ -99,8 +99,9 @@ REJUDGE:	fflush (stdin);
 	}
 }
 
-void readCorpusFromDirectory (vector<Story> &corpus,
-							  map<int, string> &glossaryIntToString, map<string, int> &glossaryStringToInt,
+void readCorpusFromDirectory (vector<Story> &corpus, map<int, string> &glossaryIntToString,
+							  map<string, int> &glossaryStringToInt,
+							  map<int, vector<int>> &storiesIndexWithCertainWord,
 							  const string tknDir, const string bndDir, const bool &isWithStemmer)
 {
 	_finddata_t file;
@@ -156,7 +157,7 @@ void readCorpusFromDirectory (vector<Story> &corpus,
 				string tknFile (file.name);
 				tknFile = tknDir + tknFile;
 
-				readTknFile (corpus, tknFile, Brecid, Erecid, glossaryIntToString, glossaryStringToInt);
+				readTknFile (corpus, tknFile, Brecid, Erecid, glossaryIntToString, glossaryStringToInt, storiesIndexWithCertainWord);
 				numOfFilesRead++;
 			}
 			firsFileIsGhost = false;
@@ -234,7 +235,8 @@ void readBndFile (vector<Story> &corpus, const string bndFile, vector<int> &Brec
 
 void readTknFile (vector<Story> &corpus, const string tknFile,
 				  const vector<int> &Brecid, const vector<int> &Erecid,
-				  map<int, string> &glossaryIntToString, map<string, int> &glossaryStringToInt)
+				  map<int, string> &glossaryIntToString, map<string, int> &glossaryStringToInt,
+				  map<int, vector<int>> &storiesIndexWithCertainWord)
 {
 
 	ifstream fin (tknFile, ios::in);
@@ -269,7 +271,9 @@ void readTknFile (vector<Story> &corpus, const string tknFile,
 
 		addWordToGlossary (word, glossaryIntToString, glossaryStringToInt);
 
-		corpus[numOfStories].addWord (glossaryStringToInt[word]);
+		int wordID = glossaryStringToInt[word];
+		corpus[numOfStories].addWord (wordID);
+		storiesIndexWithCertainWord[wordID].push_back (numOfStories);
 
 		recid++;
 	}
