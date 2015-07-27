@@ -253,16 +253,20 @@ void readTknFile (vector<Story> &corpus, const string tknFile,
 	// 4. word, very important
 	int recid = 1;
 	int numOfStories = 0;
+	bool beginOfAStroy = true;
 	string _WUseless;
 	while (fin >> _WUseless) {
 		string recidWithRedundancy, TrUseless, word;
 
 		// this means a new tkn file is read
-		if (Brecid[numOfStories] == 1)
+		if (Brecid[numOfStories] == 1 && beginOfAStroy){
 			recid = 1;
+			beginOfAStroy = false;
+		}
 
 		if (recid > Erecid[numOfStories]) {
 			numOfStories++;
+			beginOfAStroy = true;
 		}
 
 		fin >> recidWithRedundancy >> TrUseless >> word;
